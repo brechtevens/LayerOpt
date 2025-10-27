@@ -1,0 +1,25 @@
+[project]
+name = "LayerOpt"
+version = "0.1.0"
+description = "Learn material properties and design optimal multilayer dielectric stacks"
+authors = [
+  { name = "Brecht Evens", email = "brechtevens97@gmail.com" }
+]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "matplotlib",
+    "numba",
+    "pytest"
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

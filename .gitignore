@@ -1,0 +1,11 @@
+# Virtual environment
+.venv/
+
+# Temporary build and cache folders
+build
+.*cache
+__pycache__
+*.egg-info/
+
+# Sphinx
+docs/_build/
