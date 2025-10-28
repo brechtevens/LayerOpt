@@ -30,8 +30,7 @@
 Welcome to LayerOpt Documentation
 =================================
 
-LayerOpt is a Python package for the **data-driven design and optimization of multilayered electromagnetic interference (EMI) shields**.  
-It enables simulation, learning, and optimization of multilayer dielectric shields.
+LayerOpt is a Python package for the **data-driven design of multilayered electromagnetic interference (EMI) shields**, enabling simulation, learning, and optimization of multilayer dielectric shields.
 
 Problem Setup
 -------------
@@ -82,7 +81,7 @@ More details can be found on the :doc:`Installation <installation>` page.
 References
 ----------
 
-LayerOpt builds on the methodology introduced by De Smedt et al. (2025), which presents a framework for producing optimally layered EMI shields with maximal absorption and minimal reflection.
+LayerOpt builds on the optimization strategy introduced in the following work:
 
 S. De Smedt, B. Evens, P. Ravichandran, P. Patrinos, F. Van Loock, and R. Cardinaels,  
 "SMaRT Stacking: A Methodology to Produce Optimally Layered EMI Shields with Maximal Green Index Using Fused Deposition Modeling," *Adv. Funct. Mater.*, 2025, e12713.  
