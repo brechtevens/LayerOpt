@@ -3,10 +3,10 @@ import shutil
 import numpy as np
 import pandas as pd
 import pytest
-from LayerOpt.helper import ExperimentData  # adjust import if helper.py moves
+from LayerOpt.core import ExperimentData  # adjust import if core.py moves
 
 # Path to the test data folder
-TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'test_data')
+TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), '../data')
 
 @pytest.fixture
 def experiment_data():
@@ -99,11 +99,11 @@ def test_optional_fields_loaded(experiment_data):
     # Example checks based on the sample overview.csv file
     # 000wt_1
     assert experiment_data.layer_thickness['000wt_1'] == 0.005
-    assert experiment_data.impedance_out['000wt_1'] == 0.5
+    assert experiment_data.impedance_out['000wt_1'] == 1  # default if missing
 
     # 050wt_1
-    assert experiment_data.layer_thickness['050wt_1'] == 0.002
-    assert experiment_data.impedance_out['050wt_1'] == 1  # default if missing
+    assert experiment_data.layer_thickness['050wt_1'] == 0.004
+    assert experiment_data.impedance_out['050wt_1'] == 0.5
 
     # 100wt_1
     assert experiment_data.layer_thickness['100wt_1'] == 0.005  # default if missing

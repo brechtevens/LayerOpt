@@ -281,7 +281,7 @@ class MultilayerStructure:
 			-------
 			E : np.ndarray, shape (L, 2)
 				Complex array containing the electric field amplitudes for each frequency, where `L` is the number of frequencies
-				in `freq_vec`. `E[:, 0]` represents the forward-traveling wave and `E[:, 1]` represents the backward-traveling wave.
+				in `freq_vec`. `E[:, 0]` represents the forward-traveling waves and `E[:, 1]` represents the backward-traveling waves for each frequency.
 		"""
 		if len(freq_vec) < 50:
 			return self._get_waves_serial(
@@ -425,22 +425,18 @@ class MultilayerStructure:
 		AR, SET = self.get_AR_SET(x, freq_vec, eps_model)
 
 		## plot response
-		plt.plot(SET, AR, marker='d', linestyle="", label=label)
+		plt.plot(SET, AR, marker='.', linestyle="", label=label)
 		plt.ylabel("A/R")
 		plt.xlabel("Shielding effectiveness [dB]")
-		
-		current_ylim = plt.gca().get_ylim()
-		if current_ylim[1] > 250:
-			plt.ylim(bottom=-5, top=250)
 
-	def visualize_behavior(self, arg : Union[np.ndarray, tuple, 'MultilayerProblemSolution'], freq_vec, eps_model : PermittivityModel, p=None, only_discrete=False, label=''):
+	def visualize_behavior(self, arg : Union[np.ndarray, tuple, 'MultilayerProblemSolution'], freq_vec, eps_model : PermittivityModel, label=''):
 		"""
 			Visualize the absorption-to-reflectance ratio (A/R) versus shielding effectiveness (SET).
 
 			Parameters
 			----------
 			arg : np.ndarray, tuple, or MultilayerProblemSolution
-				Solution(s) to visualize. Can be a vector, a tuple, or a `MultilayerProblemSolution` object.
+				Solution(s) to visualize. Can be a Numpy array, a tuple, or a `MultilayerProblemSolution` object.
 				If `arg` is a NumPy array or tuple, it is treated as a single solution.
 				If `arg` is a `MultilayerProblemSolution`, the discrete solution (`x_discrete`) is always plotted,
 				and the continuous solution (`x_cont`) is plotted unless `only_discrete` is True.
@@ -448,21 +444,17 @@ class MultilayerStructure:
 				Frequencies at which to compute and plot the metrics in GHz.
 			eps_model : PermittivityModel
 				Model for the permittivity (dielectric constant) of the material.
-			p : optional
-				Optional additional parameters passed to `_visualize_behavior`.
-			only_discrete : bool, default False
-				If True, only the discrete solution is plotted when `arg` is a `MultilayerProblemSolution`.
 			label : str, default ''
 				Label for the plot legend.
 		"""
 		if isinstance(arg, np.ndarray) or isinstance(arg, tuple):
-			self._visualize_behavior(arg, freq_vec, eps_model, p, label=label)
+			self._visualize_behavior(arg, freq_vec, eps_model, label=label)
 		else:
-			self._visualize_behavior(arg.x_discrete, freq_vec, eps_model, p, label='discrete solution ' + label)
-			if only_discrete:
-				plt.legend()
+			if arg.x_ranges is None:
+				self._visualize_behavior(arg.x_cont, freq_vec, eps_model, label='solution ' + label)
 			else:
-				self._visualize_behavior(arg.x_cont, freq_vec, eps_model, p, label='continuous solution ' + label)
+				self._visualize_behavior(arg.x_discrete, freq_vec, eps_model, label='discrete solution ' + label)
+				self._visualize_behavior(arg.x_cont, freq_vec, eps_model, label='continuous solution ' + label)
 				plt.legend()
 
 def closest_entries(array, x, m):
@@ -535,7 +527,7 @@ class MultilayerOptimizer:
 		n_discr : int
 			Number of material parameters to check during optimization at each layer.
 	"""
-	def __init__(self, structure: MultilayerStructure, eps_model: PermittivityModel, freq_optimize: np.ndarray = np.array([8, 12]), SE_min: float = 30, lb: float = 0.0, ub: float = 1.0, material_list: np.ndarray = [0, 0.5, 1], n_discr: int = 2):
+	def __init__(self, structure: MultilayerStructure, eps_model: PermittivityModel, freq_optimize: np.ndarray = np.array([8, 12]), SE_min: float = 30, lb: float = 0.0, ub: float = 1.0, material_list: np.ndarray = None, n_discr: int = 2):
 		"""
 			Initialize the optimizer with a structure, permittivity model, and optional settings.
 
@@ -555,8 +547,7 @@ class MultilayerOptimizer:
 			ub : float, optional
 				Upper bound for material parameters. Default is 1.0.
 			material_list : np.ndarray, optional
-				List of material parameters that can be manufactured. Default is
-				[lb, 0.5, ub].
+				List of material parameters that can be manufactured. Default is None.
 			n_discr : int, optional
 				Number of material parameters to check during optimization at each layer.
 				Default is 2.
@@ -567,10 +558,9 @@ class MultilayerOptimizer:
 		self.SE_min = SE_min
 		self.lb = lb
 		self.ub = ub
-		self.material_list = material_list if material_list is not None else np.array(
-			[self.lb, 0.5, 1, 2.5, 3.5, 5, 6, 7.5, 8.5, self.ub]
-		)
+		self.material_list = material_list
 		self.n_discr = n_discr
+
 	@property
 	def total_t(self):
 		"""The total thickness of the multilayer dielectric slab structure."""
@@ -649,13 +639,15 @@ class MultilayerOptimizer:
 	def optimize(self, x_0):
 		"""
 			Optimize the material parameters for each layer in  multilayer dielectric slab structure to minimize R/A while satisfying shielding constraints.
-
-			This method performs a two-step optimization:
 			
-			1. Continuous optimization using a basin-hopping algorithm with bounds on  and SE constraints.
-			2. Discrete optimization over manufacturable Material parameters based on the continuous solution.
+			This method performs a two-step optimization:
 
-			The optimization can iterate multiple times around the discrete solution to search for nearby minima.
+			1. Continuous optimization using a basin-hopping algorithm with bounds on the material parameters and shielding effectiveness (SE) constraints.
+			2. If `self.material_list` is not `None`, an additional brute-force search is performed among layer stacks with material parameters in `self.material_list` that are close to the continuous solution. This 2-step procedure is then repeated multiple times to explore nearby minima.
+
+			Warning
+			-------
+			Only use this method with relatively small `self.n_discr` values, as the brute-force step can become computationally expensive.
 
 			Parameters
 			----------
@@ -702,79 +694,90 @@ class MultilayerOptimizer:
 			# Returns final x value of the continuous optimizer
 			x_cont = opt.x
 			f_cont = opt.fun
+
+			if self.material_list is not None:
 			
-			# Apply the function to each element in the input array
-			x_ranges = np.array([closest_entries(self.material_list, val, self.n_discr) for val in x_cont])
+				# Apply the function to each element in the input array
+				x_ranges = np.array([closest_entries(self.material_list, val, self.n_discr) for val in x_cont])
 
-			# Discrete optimization
-			tic = time.perf_counter()
-			x_points = list(itertools.product(*x_ranges))
-			with mp.Pool(mp.cpu_count()) as pool:
-				x_results = pool.map(self.eval_brute_cost, x_points)
-			x_discrete = np.array(x_points[np.argmin(x_results)])
-			toc = time.perf_counter()
-			sol_time_discrete = toc - tic
-			f_discrete = self.eval_cost(x_discrete)
+				# Discrete optimization
+				tic = time.perf_counter()
+				x_points = list(itertools.product(*x_ranges))
+				with mp.Pool(mp.cpu_count()) as pool:
+					x_results = pool.map(self.eval_brute_cost, x_points)
+				x_discrete = np.array(x_points[np.argmin(x_results)])
+				toc = time.perf_counter()
+				sol_time_discrete = toc - tic
+				f_discrete = self.eval_cost(x_discrete)
 
-			return x_cont, f_cont, x_discrete, f_discrete, x_ranges, sol_time_cont, sol_time_discrete
+				return x_cont, f_cont, x_discrete, f_discrete, x_ranges, sol_time_cont, sol_time_discrete
+
+			else:
+
+				return x_cont, f_cont, x_cont, f_cont, None, sol_time_cont, 0
 
 		print('Starting optimization')
 		x_cont, f_cont, x_discrete, f_discrete, x_ranges, sol_time_cont, sol_time_discrete = optimization_step(x_0)
 
-		print('Finished initial optimization, checking nearby region for other minima')
-		for k in range(25):
-			x_cont_new, f_cont_new, x_discrete_new, f_discrete_new, x_ranges_new, delta_sol_time_cont, delta_sol_time_discrete = optimization_step(x_discrete)
+		if self.material_list is not None:
+			print('Finished initial optimization, checking nearby region for other minima')
+			for k in range(25):
+				x_cont_new, f_cont_new, x_discrete_new, f_discrete_new, x_ranges_new, delta_sol_time_cont, delta_sol_time_discrete = optimization_step(x_discrete)
 
-			sol_time_cont += delta_sol_time_cont
-			sol_time_discrete += delta_sol_time_discrete
+				sol_time_cont += delta_sol_time_cont
+				sol_time_discrete += delta_sol_time_discrete
 
-			if f_discrete_new >= f_discrete - 1e-12:
-				print('No better local minima found, optimization completed.')
-				break
-			else:
-				x_cont, f_cont, x_discrete, f_discrete, x_ranges = x_cont_new, f_cont_new, x_discrete_new, f_discrete_new, x_ranges_new
-				print('Iteration ' + str(k+1) + ': reduced A/R by ' + str(f_discrete_new - f_discrete))
+				if f_discrete_new >= f_discrete - 1e-12:
+					print('No better local minima found, optimization completed.')
+					break
+				else:
+					x_cont, f_cont, x_discrete, f_discrete, x_ranges = x_cont_new, f_cont_new, x_discrete_new, f_discrete_new, x_ranges_new
+					print('Iteration ' + str(k+1) + ': reduced A/R by ' + str(f_discrete_new - f_discrete))
+		else:
+			print('Finished continuous optimization, no discrete optimization performed since material_list is None')
 		
 		return MultilayerProblemSolution(x_0, x_cont, f_cont, x_discrete, f_discrete, x_ranges, precompile_time, sol_time_cont, sol_time_discrete)
 
-	def visualize_optimization(self, MP_sol, x_0=None, only_discrete=False):
+	def visualize_optimization(self, MP_sol, x_0=None):
 		"""
 			Plot the initial, continuous, and discrete optimization solutions for the material parameters across the multilayer dielectric slab structure.
-			Grid lines are added to indicate which discrete material parameters were considered during the brute-force step of the optimization procedure.
+			Grid lines are added to indicate which discrete material parameters were considered during the brute-force step of the optimization procedure (if applicable).
 
 			Parameters
 			----------
 			MP_sol : MultilayerProblemSolution
-				MultilayerProblemSolution object containing the initial, continuous, and discrete solutions, along with the ranges 
-				used for discrete optimization.
+				MultilayerProblemSolution object containing the initial, continuous, and discrete solutions, along with the ranges used for discrete optimization.
 			x_0 : array-like, optional
 				Initial guess for the material properties across layers. If None, the initial guess stored in `MP_sol` is used.
-			only_discrete : bool, default False
-				If True, only the discrete solution is plotted. Otherwise, both continuous and discrete solutions are shown.
 		"""
-		x_mins = [min(MP_sol.x_ranges[0])]
-		x_maxs = [max(MP_sol.x_ranges[0])]
-		for i in range(1,self.n_lay+1):
-			x_mins.append(np.min(MP_sol.x_ranges[i-1:i+1]))
-			x_maxs.append(np.max(MP_sol.x_ranges[i-1:i+1]))
+		if MP_sol.x_ranges is not None:
+			x_mins = [min(MP_sol.x_ranges[0])]
+			x_maxs = [max(MP_sol.x_ranges[0])]
+			for i in range(1,self.n_lay+1):
+				x_mins.append(np.min(MP_sol.x_ranges[i-1:i+1]))
+				x_maxs.append(np.max(MP_sol.x_ranges[i-1:i+1]))
 
-		plt.figure(1)
-		for i in range(self.n_discr):
-			plt.hlines(MP_sol.x_ranges[:,i],np.linspace(0,self.total_t,self.n_lay+1)[:-1],np.linspace(0,self.total_t,self.n_lay+1)[1:], color='0.5', linewidth=0.5, linestyle='dashed',zorder=0)
-		
-		for i, x in enumerate(np.linspace(0,self.total_t,self.n_lay+1)):
-			plt.vlines(x, x_mins[i], x_maxs[i], color='0.5', linewidth=0.5, linestyle='dashed',zorder=0)
+			plt.figure(1)
+			for i in range(self.n_discr):
+				plt.hlines(MP_sol.x_ranges[:,i],np.linspace(0,self.total_t,self.n_lay+1)[:-1],np.linspace(0,self.total_t,self.n_lay+1)[1:], color='0.5', linewidth=0.5, linestyle='dashed',zorder=0)
+			
+			for i, x in enumerate(np.linspace(0,self.total_t,self.n_lay+1)):
+				plt.vlines(x, x_mins[i], x_maxs[i], color='0.5', linewidth=0.5, linestyle='dashed',zorder=0)
 
-		plt.stairs(MP_sol.x_0, np.linspace(0,self.total_t,self.n_lay+1), color='r', linewidth=2.0, label='initial guess')
-		if not only_discrete:
+			plt.stairs(MP_sol.x_0, np.linspace(0,self.total_t,self.n_lay+1), color='r', linewidth=2.0, label='initial guess')
 			plt.stairs(MP_sol.x_cont, np.linspace(0,self.total_t,self.n_lay+1), color='b', linewidth=2.0, label='continuous solution',zorder=1)
-		plt.stairs(MP_sol.x_discrete, np.linspace(0,self.total_t,self.n_lay+1), color='0', linewidth=2.0, label='discrete solution',zorder=2)
+			plt.stairs(MP_sol.x_discrete, np.linspace(0,self.total_t,self.n_lay+1), color='0', linewidth=2.0, label='discrete solution',zorder=2)
+		else:
+			plt.stairs(MP_sol.x_0, np.linspace(0,self.total_t,self.n_lay+1), color='r', linewidth=2.0, label='initial guess')
+			plt.stairs(MP_sol.x_cont, np.linspace(0,self.total_t,self.n_lay+1), color='b', linewidth=2.0, label='solution',zorder=1)
+		
 		plt.ylim([self.lb - 0.1*(self.ub-self.lb),self.ub + 0.1*(self.ub-self.lb)])
 		plt.xlim([-0.1*self.total_t,1.1*self.total_t])
 		plt.legend()
 		plt.xlabel('Thickness [m]')
-		plt.ylabel('CNT concentration [wt%]')
+		plt.ylabel('x')
 		interactive(True)
+
 
 
 class MultilayerProblemSolution:
@@ -897,146 +900,105 @@ class MultilayerLearner:
 		self.measurements = measurements
 		self.eps_model = eps_model
 
-	@property
-	def n(self):
-		"""Total number of measurements."""
-		return 501*len(self.measurements.get_names())
-
-	def eval_relative_errors_SET_AR(self, p):
+	def cost_relative_SET_AR(self):
 		"""
-			Compute the squared relative errors for shielding effectiveness (SET) and 
-			absorption-to-reflectance ratio (A/R) across all experiments.
+			Return a callable cost function computing squared relative errors for
+			shielding effectiveness (SET) and absorption-to-reflectance ratio (A/R).
+
+			Usage:
+				learner.optimize(p0, cost_fun=learner.cost_relative_SET_AR())
+		"""
+		def cost(p):
+			errors_SET, errors_AR = 0, 0
+			self.eps_model.p = p
+
+			for experiment in self.measurements.get_names():
+				R, T, A = self.measurements.structure[experiment].get_wave_properties(
+					self.measurements.get_material_parameters(experiment),
+					self.measurements.get_X(experiment),
+					self.eps_model
+				)
+				T_meas, R_meas, A_meas = (self.measurements.get_T(experiment),
+										self.measurements.get_R(experiment),
+										self.measurements.get_A(experiment))
+				SET_meas = 10*np.log10(1/T_meas)
+				AR_meas = A_meas/R_meas
+
+				errors_SET += np.linalg.norm((10*np.log10(1/T) - SET_meas)/SET_meas)**2
+				errors_AR += np.linalg.norm((A/R - AR_meas)/AR_meas)**2
+
+			return (errors_SET + errors_AR) / (2 * self.measurements.n)
+
+		return cost
+
+	def cost_coeffs(self):
+		"""
+			Return a callable cost function computing squared errors on T, R, A coefficients.
+
+			Usage:
+				learner.optimize(p0, cost_fun=learner.cost_coeffs())
+		"""
+		def cost(p):
+			errors_T, errors_R, errors_A = 0, 0, 0
+			self.eps_model.p = p
+
+			for experiment in self.measurements.get_names():
+				R, T, A = self.measurements.structure[experiment].get_wave_properties(
+					self.measurements.get_material_parameters(experiment),
+					self.measurements.get_X(experiment),
+					self.eps_model
+				)
+				errors_T += np.linalg.norm(T - self.measurements.get_T(experiment))**2
+				errors_R += np.linalg.norm(R - self.measurements.get_R(experiment))**2
+				errors_A += np.linalg.norm(A - self.measurements.get_A(experiment))**2
+
+			return (errors_T + errors_R + errors_A) / (3 * self.measurements.n)
+
+		return cost
+
+	def optimize(self, p0, cost_fun, niter=10, T=0.01, maxiter=1e4):
+		"""
+			Optimizes the permittivity model parameters by minimizing a provided cost function
+			using a basin-hopping algorithm.
 
 			Parameters
 			----------
-			p : array-like
-				Current permittivity model parameters.
-
-			Returns
-			-------
-			errors_SET : float
-				Sum of squared relative errors for SET across all experiments.
-			errors_AR : float
-				Sum of squared relative errors for A/R across all experiments.
-		"""
-		errors_SET, errors_AR = 0, 0
-
-		for experiment in self.measurements.get_names():
-			R, T, A = self.measurements.structure[experiment].get_wave_properties(self.measurements.get_material_parameters(experiment), self.measurements.get_X(experiment), self.eps_model, p)
-			T_meas, R_meas, A_meas = self.measurements.get_T(experiment), self.measurements.get_R(experiment), self.measurements.get_A(experiment)
-			SET_meas = 10*np.log10(1/T_meas)
-			AR_meas = A_meas/R_meas
-
-			errors_SET += np.linalg.norm(
-					(10*np.log10(1/T) - SET_meas)/SET_meas
-				)**2
-			errors_AR += np.linalg.norm(
-					(A/R - AR_meas)/AR_meas
-				)**2
-
-		return errors_SET, errors_AR
-
-	def eval_errors_coefficients(self, p):
-		"""
-			Compute the squared errors between predicted and measured transmittance (T), 
-			reflectance (R), and absorption (A) coefficients across all experiments.
-
-			Parameters
-			----------
-			p : array-like
-				Current permittivity model parameters.
-
-			Returns
-			-------
-			errors_T : float
-				Sum of squared errors for transmittance.
-			errors_R : float
-				Sum of squared errors for reflectance.
-			errors_A : float
-				Sum of squared errors for absorption.
-		"""
-		errors_T, errors_R, errors_A = 0, 0, 0
-
-		for experiment in self.measurements.get_names():
-			R, T, A = self.measurements.structure[experiment].get_wave_properties(self.measurements.get_material_parameters(experiment), self.measurements.get_X(experiment), self.eps_model, p)
-			errors_T += np.linalg.norm(T - self.measurements.get_T(experiment))**2
-			errors_R += np.linalg.norm(R - self.measurements.get_R(experiment))**2
-			errors_A += np.linalg.norm(A - self.measurements.get_A(experiment))**2
-
-		return errors_T, errors_R, errors_A
-
-	def eval_cost(self, p, cost_fun='relative-SET-AR'):
-		"""
-			Evaluate the cost function for the learning problem.
-
-			Parameters
-			----------
-			p : array-like
-				Current permittivity model parameters.
-			cost_fun : str, default 'relative-SET-AR'
-				Choice of cost function. If 'coeffs', the cost is computed using 
-				squared errors on transmittance, reflectance, and absorption. 
-				If 'relative-SET-AR', the cost is computed using squared relative 
-				errors on shielding effectiveness and absorption-to-reflectance ratio.
-
-			Returns
-			-------
-			float
-				Normalized cost value based on the selected cost function.
-
-			Raises
-			------
-			NotImplementedError
-				If an unsupported cost_fun value is provided.
-		"""
-		if cost_fun == 'coeffs':
-			return sum(self.eval_errors_coefficients(p))/(3*self.n)
-		elif cost_fun == 'relative-SET-AR':
-			return sum(self.eval_relative_errors_SET_AR(p))/(2*self.n)
-		else:
-			raise NotImplementedError()
-
-	def optimize(self, x_0, cost_fun='relative-SET-AR'):
-		"""
-			Optimizes the permittivity model parameters by minimizing the chosen cost function using a basin-hopping algorithm.
-
-			Parameters
-			----------
-			x_0 : array-like
+			p0 : array-like
 				Initial guess for the permittivity model parameters.
-			cost_fun : str, default 'relative-SET-AR'
-				Choice of cost function. If 'coeffs', the cost is based on squared errors
-				on transmittance, reflectance, and absorption. If 'relative-SET-AR', the cost
-				is based on squared relative errors on shielding effectiveness and absorption-to-reflectance ratio.
+			cost_fun : callable
+				Function that takes a parameter vector and returns a scalar cost.
+			niter : int, optional
+				Number of basin-hopping iterations.
+			T : float, optional
+				Temperature parameter for basin-hopping.
+			maxiter : int, optional
+				Maximum iterations for the local minimizer.
 
 			Returns
 			-------
 			optimal_params : np.ndarray
-				Optimized permittivity model parameters that minimize the cost function.
+				Optimized permittivity model parameters.
 			optimal_cost : float
-				Value of the cost function at the optimal parameters.
+				Value of the cost function at the optimum.
 		"""
-		def evaluate_cost_fun(x):
-			return self.eval_cost(x, cost_fun)
-
-		print('starting least-squares')
+		print('starting optimization')
 		tic = time.perf_counter()
+
 		opt = basinhopping(
-			evaluate_cost_fun, 
-			x_0, 
+			cost_fun, 
+			p0, 
 			minimizer_kwargs={
 				"bounds":self.eps_model.bounds,
-				"options":{"maxiter": 1e4, "disp": False}
+				"options":{"maxiter": maxiter, "disp": False}
 			}, 
-			niter=10,
-			T=0.01
+			niter=niter,
+			T=T
 		)
 		toc =  time.perf_counter()
 		sol_time_cont = toc - tic
 
 		print(opt['lowest_optimization_result']['message'])
 
-		# Returns final x value of the continuous optimizer
 		optimal_params = opt.x
 		optimal_cost = opt.fun
 

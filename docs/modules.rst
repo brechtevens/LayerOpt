@@ -1,17 +1,11 @@
 API Reference
 =============
 
-.. automodule:: LayerOpt.Permittivity
-   :members:
-   :undoc-members:
-   :show-inheritance:
+The API is organized into modules for permittivity models, multilayer optimization, data, and utilities.
 
-.. automodule:: LayerOpt.Experiment
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. toctree::
+   :maxdepth: 2
 
-.. automodule:: LayerOpt.helper
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   module_permittivity
+   module_multilayer
+   module_data

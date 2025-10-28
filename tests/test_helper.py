@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 from numba import njit
 
-from LayerOpt.helper import MultilayerStructure
+from LayerOpt.core import MultilayerStructure
 
 # -------------------------------------------------------------------
 # Mock permittivity model for predictable, lossless behavior

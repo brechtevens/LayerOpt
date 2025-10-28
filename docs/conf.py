@@ -18,8 +18,9 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
+    "sphinx.ext.autosummary",
 ]
-
+autosummary_generate = True  # <-- important
 autodoc_typehints = "description"
 autodoc_class_signature = "separated"
 
@@ -49,3 +50,11 @@ html_static_path = ['_static']
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../src'))
+
+master_doc = 'index'
+
+html_theme_options = {
+    'collapse_navigation': False,
+    'navigation_depth': 3,
+    'titles_only': False
+}

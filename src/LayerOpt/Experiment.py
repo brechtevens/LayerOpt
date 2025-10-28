@@ -13,7 +13,7 @@ class ExperimentData:
 		Dataclass for managing and loading experimental multilayer measurement data.
 
 		This class loads experiment metadata (material parameters, multilayer structure, characteristic impedance of the outgoing medium)
-		and S-parameter data (S11, S21, S12, S22) from a given directory. It also provides helper methods to 
+		and S-parameter data (S11, S21, S12, S22) from a given directory. It also provides core methods to 
 		compute transmission, reflection, and absorption coefficients, as well as derived metrics 
 		such as A/R and shielding effectiveness (SET).
 
@@ -41,6 +41,8 @@ class ExperimentData:
 			Dictionary mapping experiment names to the corresponding complex-valued S-parameters, stored as a 2xL array where 
 			the first row contains S11 and the second row contains S21.
 			Magnitude and phase data from the CSV file (e.g., `db:Trc1_S11`, `ang:Trc1_S11`, etc.) are combined into these complex quantities.
+		n:  int
+			Number of VNA measurements in the dataset.
 
 		Notes
 		-----
@@ -79,6 +81,7 @@ class ExperimentData:
 	structure: dict = field(default_factory=dict)
 	X: dict = field(default_factory=dict)
 	Y: dict = field(default_factory=dict)
+	n: int = 0
 
 	def __post_init__(self):
 		"""Automatically load all experiment data upon initialization."""
@@ -100,7 +103,7 @@ class ExperimentData:
 				If `reverse = True` but one of the experiments in `overview_weights.csv` has a characteristic impedance of the last, outgoing medium which is not equal to one.
 			TODO: warning
 		"""
-		from .helper import MultilayerStructure
+		from .core import MultilayerStructure
 
 		if os.path.exists(os.path.normpath(os.path.join(self.directory, 'overview_weights.csv'))):
 			df = pd.read_csv(os.path.normpath(os.path.join(self.directory, 'overview_weights.csv')))
@@ -158,12 +161,13 @@ class ExperimentData:
 		for key in data.keys():
 			if key == 'freq[Hz]':
 				X_freq = data['freq[Hz]'].values * 1e-9  # Convert frequency to GHz
+				self.n += len(data['freq[Hz]'])
 			elif key[:6] == 'db:Trc':
 				filtered_magnitudes[key[-3:]] = data[key].values
 			elif key[:7] == 'ang:Trc':
 				filtered_angles[key[-3:]] = data[key].values
 			else:
-				raise NotImplementedError("The provided CSV file cantains keys which are not compatible. Only the key 'freq[Hz]' and keys ending in 'db:Trc' and 'and:Trc' are supported.")
+				raise NotImplementedError("The provided CSV file contains keys which are not compatible. Only the key 'freq[Hz]' and keys ending in 'db:Trc' and 'and:Trc' are supported.")
 			
 		def get_S(db, angle):
 			return (10**(db/20)) * np.exp(1j*angle*np.pi/180)
@@ -353,7 +357,7 @@ class ExperimentData:
 
 		## plot response
 		dir = self.directory.split('..')[1]
-		plt.plot(SET, AR, marker='d', linestyle="", label=dir + experiment_name)
+		plt.plot(SET, AR, marker='.', linestyle="", label=dir + experiment_name)
 		plt.ylabel("A/R")
 		plt.xlabel("Shielding effectiveness [dB]")
 		plt.legend()
@@ -449,19 +453,3 @@ class ExperimentData:
 		"""
 		AR, SET = self.get_AR_SET(experiment_name)
 		return np.min(AR), np.min(SET)
-
-# Usage example:
-if __name__ == "__main__":
-	# Initialize and automatically load the data with reverse option
-	experiment_data = ExperimentData(directory='../10 Layer/', reverse=True)
-	
-	# Access the loaded data
-	experiment_name = '250724_Stack30dB'  # Replace with your experiment name
-	print(f"X data for {experiment_name}: {experiment_data.get_X(experiment_name)}")
-	print(f"Y data for {experiment_name}: {experiment_data.get_Y(experiment_name)}")
-
-	# Access reversed data
-	reverse_experiment_name = experiment_name + "_reverse"
-	print(f"X data for {reverse_experiment_name}: {experiment_data.get_X(reverse_experiment_name)}")
-	print(f"Y data for {reverse_experiment_name}: {experiment_data.get_Y(reverse_experiment_name)}")
-	print(f"Weights for {reverse_experiment_name}: {experiment_data.get_material_parameters(reverse_experiment_name)}")

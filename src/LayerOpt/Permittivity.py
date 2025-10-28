@@ -1,14 +1,16 @@
 import numpy as np
 from numba import njit
 
-tolerance = 10**-5
+tolerance = 10**-8
 
 class PermittivityModel:
 	p = np.array([], dtype=np.float64)
 	p_extra = np.array([], dtype=np.float64)
 
 	"""
-		Base class for defining parametric forms of the permittivity (ε) of a material.
+		Base class for defining parametric forms of the permittivity (ε) of a material. We use the convention that
+
+		    ε = ε' + iε″, with ε″ < 0 for lossy materials.
 
 		Attributes
 		----------
