@@ -15,7 +15,7 @@ You can install LayerOpt directly from the GitHub repository:
 
    git clone https://github.com/brechtevens/LayerOpt.git
    cd LayerOpt
-   python3 -m pip install -e .
+   python3 -m pip install .
 
 This will install LayerOpt along with its required dependencies:
 

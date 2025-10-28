@@ -65,7 +65,7 @@ LayerOpt can be installed as follows:
 
    git clone https://github.com/brechtevens/LayerOpt.git
    cd LayerOpt
-   python3 -m pip install -e .
+   python3 -m pip install .
 
 More details can be found on the :doc:`Installation <installation>` page.
 
