@@ -10,7 +10,7 @@ This script demonstrates how to:
 Note:
 -----
 This example assumes the folder `../data/` contains:
-- `overview_weights.csv` defining material parameters and optional metadata
+- `overview.csv` defining material parameters and optional metadata
 - CSV files with S-parameter measurements for each experiment
 """
 

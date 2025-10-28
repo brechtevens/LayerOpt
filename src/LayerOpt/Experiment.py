@@ -20,7 +20,7 @@ class ExperimentData:
 		Attributes
 		----------
 		directory : str
-			Path to the directory containing experiment CSV files and the `overview_weights.csv` file.
+			Path to the directory containing experiment CSV files and the `overview.csv` file.
 		reverse : bool
 			If True, also considers 'reversed' versions of the experiments by considering not only the forward
 			S11 and S21 measurements but also the reverse S22 and S21 measurements. Note that this is only allowed
@@ -46,11 +46,11 @@ class ExperimentData:
 
 		Notes
 		-----
-		The class expects a file named `overview_weights.csv` in the given directory, which defines the material parameters 
+		The class expects a file named `overview.csv` in the given directory, which defines the material parameters 
 		of each experiment, as well as the layer thickness and optionally the characteristic impedance of the last, outgoing medium. 
 		This is typically equal to one (free space) but can, for instance, be set to zero to represent a reflective material.
 
-		Each experiment listed in `overview_weights.csv` should be accompanied by a corresponding CSV file containing S-parameter 
+		Each experiment listed in `overview.csv` should be accompanied by a corresponding CSV file containing S-parameter 
 		data with columns named `db:Trc...` and `ang:Trc...` measured by a vector network analyzer. The files are automatically parsed, converted 
 		into complex S-parameters, and stored for analysis.
 
@@ -89,7 +89,7 @@ class ExperimentData:
 
 	def load_overview(self):
 		"""
-			Load the material parameter data and experiment setup metadata from the file `overview_weights.csv`.
+			Load the material parameter data and experiment setup metadata from the file `overview.csv`.
 
 			This method reads a CSV file that defines the material parameters, layer thickness,
 			and optionally the outgoing medium impedance for each experiment. It also 
@@ -98,15 +98,15 @@ class ExperimentData:
 			Raises
 			------
 			FileNotFoundError
-				If `overview_weights.csv` cannot be found in the specified directory.
+				If `overview.csv` cannot be found in the specified directory.
 			NotImplementedError
-				If `reverse = True` but one of the experiments in `overview_weights.csv` has a characteristic impedance of the last, outgoing medium which is not equal to one.
+				If `reverse = True` but one of the experiments in `overview.csv` has a characteristic impedance of the last, outgoing medium which is not equal to one.
 			TODO: warning
 		"""
 		from .core import MultilayerStructure
 
-		if os.path.exists(os.path.normpath(os.path.join(self.directory, 'overview_weights.csv'))):
-			df = pd.read_csv(os.path.normpath(os.path.join(self.directory, 'overview_weights.csv')))
+		if os.path.exists(os.path.normpath(os.path.join(self.directory, 'overview.csv'))):
+			df = pd.read_csv(os.path.normpath(os.path.join(self.directory, 'overview.csv')))
 
 			# Convert weight strings to numpy arrays and store them
 			for index, row in df.iterrows():
@@ -128,7 +128,7 @@ class ExperimentData:
 				
 				self.structure[row['experiment_name']] = MultilayerStructure(t = self.layer_thickness[row['experiment_name']], n_lay = len(self.wt[row['experiment_name']]), impedance_out = self.impedance_out[row['experiment_name']])
 		else:
-			raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), os.path.normpath(os.path.join(self.directory, 'overview_weights.csv')))
+			raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), os.path.normpath(os.path.join(self.directory, 'overview.csv')))
 
 	def load_experiment(self, filename):
 		"""
@@ -189,14 +189,14 @@ class ExperimentData:
 		"""
 			Load all experiment data from the given directory.
 
-			This method first loads the material parameter data and experiment setup metadata from `overview_weights.csv`,
+			This method first loads the material parameter data and experiment setup metadata from `overview.csv`,
 			then iterates over all other CSV files in the directory to load S-parameter data for each experiment.
 		"""
 		self.load_overview()
 
 		# Loop through all files in the directory and load experiment data (excluding the weights file)
 		for filename in os.listdir(self.directory):
-			if filename.endswith('.csv') and filename != 'overview_weights.csv':
+			if filename.endswith('.csv') and filename != 'overview.csv':
 				self.load_experiment(filename)
 
 	def get_names(self):

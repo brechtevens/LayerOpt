@@ -123,14 +123,14 @@ def test_reverse_with_invalid_impedance():
 def test_unsupported_csv_columns():
     os.makedirs(BROKEN_DIR, exist_ok=True)
 
-    # Create overview_weights.csv for completeness
+    # Create overview.csv for completeness
     df = pd.DataFrame({
         'experiment_name': ['bad_csv'],
         'parameters': ['[1,2,3]'],
         'layer_thickness': [0.001],
         'impedance_out': [1]
     })
-    df.to_csv(os.path.join(BROKEN_DIR, 'overview_weights.csv'), index=False)
+    df.to_csv(os.path.join(BROKEN_DIR, 'overview.csv'), index=False)
 
     # Create bad CSV with unsupported columns
     bad_csv_path = os.path.join(BROKEN_DIR, 'bad_csv.csv')
@@ -149,7 +149,7 @@ def test_unsupported_csv_columns():
     # Cleanup
     shutil.rmtree(BROKEN_DIR)
 
-# --- Test for FileNotFoundError when overview_weights.csv is missing ---
+# --- Test for FileNotFoundError when overview.csv is missing ---
 def test_missing_overview_csv():
     os.makedirs(MISSING_DIR, exist_ok=True)
     try:
