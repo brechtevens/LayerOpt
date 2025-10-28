@@ -13,7 +13,7 @@ You can install LayerOpt directly from the repository:
 ```bash
 git clone https://github.com/brechtevens/LayerOpt.git
 cd LayerOpt
-python3 -m pip install -e .
+python3 -m pip install .
 ```
 
 ## Documentation
