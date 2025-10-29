@@ -1,0 +1,22 @@
+﻿LayerOpt.core.MultilayerProblemSolution
+=======================================
+
+.. currentmodule:: LayerOpt.core
+
+.. autoclass:: MultilayerProblemSolution
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MultilayerProblemSolution.__init__
+   
+   
+
+   
+   
+   

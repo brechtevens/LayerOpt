@@ -1,0 +1,1223 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LayerOpt.core &mdash; LayerOpt 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LayerOpt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Navigation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#installing-layeropt">Installing LayerOpt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#testing-your-installation">Testing Your Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#permittivity-models">Permittivity Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#multilayerstructure">MultilayerStructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#learning-permittivity-models">Learning Permittivity Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#optimizing-multilayer-structures">Optimizing Multilayer Structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../background.html">Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../background.html#multilayer-dielectric-slab-structures">Multilayer Dielectric Slab Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../background.html#learning-permittivity-model">Learning Permittivity Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../background.html#optimizing-material-parameters">Optimizing Material Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../module_permittivity.html">LayerOpt.Permittivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.PermittivityModel.html">LayerOpt.Permittivity.PermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.LinearPermittivityModel.html">LayerOpt.Permittivity.LinearPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.QuadraticPermittivityModel.html">LayerOpt.Permittivity.QuadraticPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.LinearSplinePermittivityModel.html">LayerOpt.Permittivity.LinearSplinePermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.QuadraticSplinePermittivityModel.html">LayerOpt.Permittivity.QuadraticSplinePermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.SimpleLinearPermittivityModel.html">LayerOpt.Permittivity.SimpleLinearPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticPermittivityModel.html">LayerOpt.Permittivity.SimpleQuadraticPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.html">LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../module_multilayer.html">LayerOpt.core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html">LayerOpt.core.MultilayerStructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerOptimizer.html">LayerOpt.core.MultilayerOptimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerLearner.html">LayerOpt.core.MultilayerLearner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerProblemSolution.html">LayerOpt.core.MultilayerProblemSolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.closest_entries.html">LayerOpt.core.closest_entries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../module_data.html">LayerOpt.Experiment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html">LayerOpt.Experiment.ExperimentData</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LayerOpt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">LayerOpt.core</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for LayerOpt.core</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">njit</span><span class="p">,</span> <span class="n">prange</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">basinhopping</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">interactive</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.Permittivity</span><span class="w"> </span><span class="kn">import</span> <span class="n">PermittivityModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.Experiment</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExperimentData</span>
+
+
+<div class="viewcode-block" id="MultilayerStructure">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html#LayerOpt.core.MultilayerStructure">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultilayerStructure</span><span class="p">:</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Class for defining multilayer dielectric slab structures.</span>
+
+<span class="sd">		Attributes</span>
+<span class="sd">		----------</span>
+<span class="sd">		t : float</span>
+<span class="sd">			Thickness of each layer in meters.</span>
+<span class="sd">		n_lay : int</span>
+<span class="sd">			Number of layers.</span>
+<span class="sd">		impedance_out : complex</span>
+<span class="sd">			Characteristic impedance of the last (outgoing) medium.</span>
+<span class="sd">			Typically equal to one for free space.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MultilayerStructure.__init__">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html#LayerOpt.core.MultilayerStructure.__init__">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">,</span> <span class="n">n_lay</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">impedance_out</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Initialize the multilayer dielectric slab structure with the given parameters or defaults.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			t : float, optional</span>
+<span class="sd">				Thickness of each layer in meters. Default is 5e-3.</span>
+<span class="sd">			n_lay : int, optional</span>
+<span class="sd">				Number of layers. Default is 5.</span>
+<span class="sd">			impedance_out : complex or float, optional</span>
+<span class="sd">				Characteristic impedance of the outgoing medium. Default is 1 (free space).</span>
+<span class="sd">			&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span> <span class="o">=</span> <span class="n">n_lay</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">impedance_out</span> <span class="o">=</span> <span class="n">impedance_out</span></div>
+
+
+	<span class="nd">@property</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">total_t</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;The total thickness of the multilayer dielectric slab structure.&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MultilayerStructure.get_k0">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html#LayerOpt.core.MultilayerStructure.get_k0">[docs]</a>
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_k0</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Computes the free-space wavenumber of a wave with a given frequency.</span>
+<span class="sd">						</span>
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			f : float</span>
+<span class="sd">				Frequency, given in [GHz].</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			float </span>
+<span class="sd">				The corresponding free-space wavenumber.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">f</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span> <span class="o">/</span> <span class="mi">299792458</span></div>
+
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_get_waves_serial</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">n_lay</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">get_k0</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">,</span> <span class="n">impedance_out</span><span class="p">,</span> <span class="n">real_permittivity</span><span class="p">,</span> <span class="n">imaginary_permittivity</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the normalized forward and backward waves of a multilayer dielectric slab structure in a serial manner.</span>
+
+<span class="sd">			This function calculates the electromagnetic wave reflection properties for a multilayer dielectric slab structure</span>
+<span class="sd">			based on the permittivity properties of the layers. The method follows Section 6.1 from Orfanidis&#39; book </span>
+<span class="sd">			&quot;Electromagnetic Waves and Antennas&quot;, specifically equations (6.1.2) and (6.1.3) to compute the forward and </span>
+<span class="sd">			backward waves at each interface.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+<span class="sd">			freq_vec : array-like</span>
+<span class="sd">				Frequencies at which to compute the normalized forward and backward waves in GHz.</span>
+<span class="sd">			n_lay : int</span>
+<span class="sd">				Number of layers in the multilayer structure.</span>
+<span class="sd">			t : float</span>
+<span class="sd">				Thickness of each layer, used to compute phase shifts.</span>
+<span class="sd">			get_k0 : callable</span>
+<span class="sd">				Function to compute the free-space wavenumber `k0` for a given frequency.</span>
+<span class="sd">			p : array-like</span>
+<span class="sd">				Parameters of the permittivity model.</span>
+<span class="sd">			p_extra : array-like</span>
+<span class="sd">				Additional fixed parameters of the permittivity model.</span>
+<span class="sd">			impedance_out : complex</span>
+<span class="sd">				Characteristic impedance of the last, outgoing medium.</span>
+<span class="sd">			real_permittivity : callable</span>
+<span class="sd">				Function to compute the real part of the permittivity for each layer.</span>
+<span class="sd">			imaginary_permittivity : callable</span>
+<span class="sd">				Function to compute the imaginary part of the permittivity for each layer.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			E : np.ndarray, shape (L, 2)</span>
+<span class="sd">				Complex array containing the electric field amplitudes for each frequency, where `L` is the number of frequencies</span>
+<span class="sd">				in `freq_vec`. `E[:, 0]` represents the forward-traveling wave and `E[:, 1]` represents the backward-traveling wave.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq_vec</span><span class="p">)</span>
+
+		<span class="c1"># Preallocate E, RHO and TRANS matrices</span>
+		<span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+
+		<span class="n">eta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">L</span><span class="p">,</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>			<span class="c1"># characteristic impedance</span>
+		<span class="n">eps_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span> <span class="n">n_lay</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+		<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span> <span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>			<span class="c1"># refractive index</span>
+		<span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span> <span class="n">n_lay</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>		<span class="c1"># reflection coefficient</span>
+
+		<span class="n">RHO</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+		<span class="n">TRANS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+
+		<span class="n">k0</span> <span class="o">=</span> <span class="n">get_k0</span><span class="p">(</span><span class="n">freq_vec</span><span class="p">)</span>
+
+		<span class="n">eta</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">impedance_out</span>
+
+		<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_lay</span><span class="p">):</span>
+				<span class="n">eps_list</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">freq_vec</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">)</span> <span class="o">+</span> 
+							<span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">freq_vec</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">))</span>
+				<span class="n">eta</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">eps_list</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+				<span class="n">n</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">eps_list</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+
+			<span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">eta</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">eta</span><span class="p">[</span><span class="n">k</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">eta</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">eta</span><span class="p">[</span><span class="n">k</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+			<span class="c1"># Base case for the last layer</span>
+			<span class="k">if</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n_lay</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+				<span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+				<span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n_lay</span><span class="p">])</span>
+				<span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n_lay</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n_lay</span><span class="p">])</span>
+
+			<span class="c1"># Loop for layers</span>
+			<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_lay</span><span class="p">):</span>
+				<span class="n">l</span> <span class="o">=</span> <span class="n">n_lay</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">m</span>
+
+				<span class="c1"># Update RHO matrix</span>
+				<span class="n">RHO</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+				<span class="n">RHO</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span>
+				<span class="n">RHO</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span>
+				<span class="n">RHO</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+				
+				<span class="c1"># Update TRANS matrix</span>
+				<span class="n">TRANS</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">k0</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">n</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+				<span class="n">TRANS</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+				<span class="n">TRANS</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+				<span class="n">TRANS</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">k0</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">n</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+				<span class="c1"># Update E with matrix multiplication</span>
+				<span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">RHO</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">TRANS</span><span class="p">,</span> <span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]))</span>
+
+		<span class="k">return</span> <span class="n">E</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_get_waves_parallel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">n_lay</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">get_k0</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">,</span> <span class="n">impedance_out</span><span class="p">,</span> <span class="n">real_permittivity</span><span class="p">,</span> <span class="n">imaginary_permittivity</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the normalized forward and backward waves of a multilayer dielectric slab structure in a parallel manner.</span>
+
+<span class="sd">			This function calculates the electromagnetic wave reflection properties for a multilayer dielectric slab structure</span>
+<span class="sd">			based on the permittivity properties of the layers. The method follows Section 6.1 from Orfanidis&#39; book </span>
+<span class="sd">			&quot;Electromagnetic Waves and Antennas&quot;, specifically equations (6.1.2) and (6.1.3) to compute the forward and </span>
+<span class="sd">			backward waves at each interface.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+<span class="sd">			freq_vec : array-like</span>
+<span class="sd">				Frequencies at which to compute the normalized forward and backward waves in GHz.</span>
+<span class="sd">			n_lay : int</span>
+<span class="sd">				Number of layers in the multilayer structure.</span>
+<span class="sd">			t : float</span>
+<span class="sd">				Thickness of each layer, used to compute phase shifts.</span>
+<span class="sd">			get_k0 : callable</span>
+<span class="sd">				Function to compute the free-space wavenumber `k0` for a given frequency.</span>
+<span class="sd">			p : array-like</span>
+<span class="sd">				Parameters of the permittivity model.</span>
+<span class="sd">			p_extra : array-like</span>
+<span class="sd">				Additional fixed parameters of the permittivity model.</span>
+<span class="sd">			impedance_out : complex</span>
+<span class="sd">				Characteristic impedance of the last, outgoing medium.</span>
+<span class="sd">			real_permittivity : callable</span>
+<span class="sd">				Function to compute the real part of the permittivity for each layer.</span>
+<span class="sd">			imaginary_permittivity : callable</span>
+<span class="sd">				Function to compute the imaginary part of the permittivity for each layer.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			E : np.ndarray, shape (L, 2)</span>
+<span class="sd">				Complex array containing the electric field amplitudes for each frequency, where `L` is the number of frequencies</span>
+<span class="sd">				in `freq_vec`. `E[:, 0]` represents the forward-traveling wave and `E[:, 1]` represents the backward-traveling wave.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq_vec</span><span class="p">)</span>
+
+		<span class="c1"># Preallocate E, RHO and TRANS matrices</span>
+		<span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+
+		<span class="n">eta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">L</span><span class="p">,</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+		<span class="n">eps_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span> <span class="n">n_lay</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+		<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span> <span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+		<span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span> <span class="n">n_lay</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+
+		<span class="n">k0</span> <span class="o">=</span> <span class="n">get_k0</span><span class="p">(</span><span class="n">freq_vec</span><span class="p">)</span>
+
+		<span class="n">RHO</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+		<span class="n">TRANS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+
+		<span class="n">eta</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">impedance_out</span>
+
+		<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">prange</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_lay</span><span class="p">):</span>
+				<span class="n">eps_list</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">freq_vec</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">)</span> <span class="o">+</span> 
+							<span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">freq_vec</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">))</span>
+				<span class="n">eta</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">eps_list</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+				<span class="n">n</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">eps_list</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+
+			<span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">eta</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">eta</span><span class="p">[</span><span class="n">k</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">eta</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">eta</span><span class="p">[</span><span class="n">k</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+			<span class="c1"># Base case for the last layer</span>
+			<span class="k">if</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n_lay</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+				<span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+				<span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n_lay</span><span class="p">])</span>
+				<span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n_lay</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n_lay</span><span class="p">])</span>
+
+			<span class="c1"># Loop for layers</span>
+			<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_lay</span><span class="p">):</span>
+				<span class="n">l</span> <span class="o">=</span> <span class="n">n_lay</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">m</span>
+
+				<span class="c1"># Update RHO matrix</span>
+				<span class="n">RHO</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+				<span class="n">RHO</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span>
+				<span class="n">RHO</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span>
+				<span class="n">RHO</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+				
+				<span class="c1"># Update TRANS matrix</span>
+				<span class="n">TRANS</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">k0</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">n</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+				<span class="n">TRANS</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+				<span class="n">TRANS</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+				<span class="n">TRANS</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">k0</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">n</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+				<span class="c1"># Update E with matrix multiplication</span>
+				<span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">RHO</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">TRANS</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]))</span>
+
+		<span class="k">return</span> <span class="n">E</span>
+
+<div class="viewcode-block" id="MultilayerStructure.get_waves">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html#LayerOpt.core.MultilayerStructure.get_waves">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_waves</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">freq_vec</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">eps_model</span> <span class="p">:</span> <span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the normalized forward and backward waves.</span>
+
+<span class="sd">			This function calculates the electromagnetic wave reflection properties for a multilayer dielectric slab structure</span>
+<span class="sd">			based on the permittivity properties of the layers. The method follows Section 6.1 from Orfanidis&#39; book </span>
+<span class="sd">			&quot;Electromagnetic Waves and Antennas&quot;, specifically equations (6.1.2) and (6.1.3) to compute the forward and </span>
+<span class="sd">			backward waves at each interface. The computations are performed either in series or in parallel depending on </span>
+<span class="sd">			the number of considered frequencies.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+<span class="sd">			freq_vec : array-like</span>
+<span class="sd">				Frequencies at which to compute the normalized forward and backward waves in GHz.</span>
+<span class="sd">			eps_model : PermittivityModel</span>
+<span class="sd">				Model for the permittivity (dielectric constant) of the material.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			E : np.ndarray, shape (L, 2)</span>
+<span class="sd">				Complex array containing the electric field amplitudes for each frequency, where `L` is the number of frequencies</span>
+<span class="sd">				in `freq_vec`. `E[:, 0]` represents the forward-traveling waves and `E[:, 1]` represents the backward-traveling waves for each frequency.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq_vec</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_waves_serial</span><span class="p">(</span>
+				<span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_k0</span><span class="p">,</span> <span class="n">eps_model</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">eps_model</span><span class="o">.</span><span class="n">p_extra</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">impedance_out</span><span class="p">,</span> 
+				<span class="n">eps_model</span><span class="o">.</span><span class="n">_compute_real_permittivity</span><span class="p">,</span> <span class="n">eps_model</span><span class="o">.</span><span class="n">_compute_imaginary_permittivity</span>
+			<span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_waves_parallel</span><span class="p">(</span>
+				<span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_k0</span><span class="p">,</span> <span class="n">eps_model</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">eps_model</span><span class="o">.</span><span class="n">p_extra</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">impedance_out</span><span class="p">,</span>
+				<span class="n">eps_model</span><span class="o">.</span><span class="n">_compute_real_permittivity</span><span class="p">,</span> <span class="n">eps_model</span><span class="o">.</span><span class="n">_compute_imaginary_permittivity</span>
+			<span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MultilayerStructure.get_S_parameters">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html#LayerOpt.core.MultilayerStructure.get_S_parameters">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_S_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span> <span class="p">:</span> <span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the S-parameters (S11 and S21).</span>
+
+<span class="sd">			This function calculates two scattering parameters (S11 and S21) for a multilayer slab structure based on the </span>
+<span class="sd">			given frequency vector, permittivity model, and Material parameters for each layer. See also Orfanidis&#39; equation (14.1.3).</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+<span class="sd">			freq_vec : array-like</span>
+<span class="sd">				Frequencies at which to compute the S-parameters in GHz.</span>
+<span class="sd">			eps_model : PermittivityModel</span>
+<span class="sd">				Model for the permittivity (dielectric constant) of the material.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			S11 : np.ndarray, shape (L, 1)</span>
+<span class="sd">				Reflection coefficient for each frequency, where `L` is the number of frequencies in `freq_vec`.</span>
+<span class="sd">			S21 : np.ndarray, shape (L, 1)</span>
+<span class="sd">				Transmission coefficient for each frequency, where `L` is the number of frequencies in `freq_vec`.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">E</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_waves</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span><span class="p">)</span>
+
+		<span class="n">S11</span> <span class="o">=</span> <span class="n">E</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">E</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">impedance_out</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">S21</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">E</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">S21</span> <span class="o">=</span> <span class="n">E</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">S11</span><span class="p">,</span> <span class="n">S21</span></div>
+
+
+<div class="viewcode-block" id="MultilayerStructure.get_wave_properties">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html#LayerOpt.core.MultilayerStructure.get_wave_properties">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_wave_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span> <span class="p">:</span> <span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the reflectance (R), transmittance (T), and absorption (A). The computations are based on </span>
+<span class="sd">			the S-parameters (S11 and S21) obtained from `get_S_parameters`.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+<span class="sd">			freq_vec : array-like</span>
+<span class="sd">				Frequencies at which to compute the wave properties in GHz.</span>
+<span class="sd">			eps_model : PermittivityModel</span>
+<span class="sd">				Model for the permittivity (dielectric constant) of the material.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			R : np.ndarray, shape (L, 1)</span>
+<span class="sd">				Reflectance for each frequency, where `L` is the number of frequencies in `freq_vec`.</span>
+<span class="sd">			T : np.ndarray, shape (L, 1)</span>
+<span class="sd">				Transmittance for each frequency, where `L` is the number of frequencies in `freq_vec`.</span>
+<span class="sd">			A : np.ndarray, shape (L, 1)</span>
+<span class="sd">				Absorption for each frequency, where `L` is the number of frequencies in `freq_vec`.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">S11</span><span class="p">,</span> <span class="n">S21</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_S_parameters</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span><span class="p">)</span>
+		<span class="n">R</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S11</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+		<span class="n">T</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S21</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+		<span class="n">A</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">R</span> <span class="o">-</span> <span class="n">T</span>
+		<span class="k">return</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">A</span></div>
+
+
+<div class="viewcode-block" id="MultilayerStructure.get_AR_SET">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html#LayerOpt.core.MultilayerStructure.get_AR_SET">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_AR_SET</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span> <span class="p">:</span> <span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the absorption-to-reflectance ratio (A/R) and the shielding effectiveness (SET). The computations are based on </span>
+<span class="sd">			reflectance (R), transmittance (T), and absorption (A) obtained from `get_wave_properties`.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+<span class="sd">			freq_vec : array-like</span>
+<span class="sd">				Frequencies at which to compute the metrics in GHz.</span>
+<span class="sd">			eps_model : PermittivityModel</span>
+<span class="sd">				Model for the permittivity (dielectric constant) of the material.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			AR : np.ndarray</span>
+<span class="sd">				Absorption-to-reflectance ratio for each frequency.</span>
+<span class="sd">			SET : np.ndarray</span>
+<span class="sd">				Shielding effectiveness for each frequency in decibels.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_wave_properties</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">A</span><span class="o">/</span><span class="n">R</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">T</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MultilayerStructure.get_worst_case_AR_SET">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html#LayerOpt.core.MultilayerStructure.get_worst_case_AR_SET">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_worst_case_AR_SET</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span> <span class="p">:</span> <span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the worst-case (minimum) absorption-to-reflectance ratio (A/R) and shielding effectiveness (SET).</span>
+
+<span class="sd">			This function evaluates the absorption-to-reflectance ratio and shielding effectiveness across all frequencies</span>
+<span class="sd">			and returns the minimum values, representing the worst-case performance of the multilayer slab.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+<span class="sd">			freq_vec : array-like</span>
+<span class="sd">				Frequencies at which to evaluate the metrics in GHz.</span>
+<span class="sd">			eps_model : PermittivityModel</span>
+<span class="sd">				Model for the permittivity (dielectric constant) of the material.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			min_AR : float</span>
+<span class="sd">				Minimum absorption-to-reflectance ratio across all given frequencies.</span>
+<span class="sd">			min_SET : float</span>
+<span class="sd">				Minimum shielding effectiveness in decibels across all given frequencies.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">AR</span><span class="p">,</span> <span class="n">SET</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_AR_SET</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">AR</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">SET</span><span class="p">)</span></div>
+
+
+	<span class="k">def</span><span class="w"> </span><span class="nf">_visualize_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span> <span class="p">:</span> <span class="n">PermittivityModel</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Plot the absorption-to-reflectance ratio (A/R) versus shielding effectiveness (SET) for a multilayer slab,</span>
+<span class="sd">			computing A/R and SET using `get_AR_SET` across the specified frequencies. If the maximum A/R exceeds 250,</span>
+<span class="sd">			the y-axis is limited to a maximum of 250.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+<span class="sd">			freq_vec : array-like</span>
+<span class="sd">				Frequencies at which to compute and plot the metrics in GHz.</span>
+<span class="sd">			eps_model : PermittivityModel</span>
+<span class="sd">				Model for the permittivity (dielectric constant) of the material.</span>
+<span class="sd">			label : str, optional</span>
+<span class="sd">				Label for the plot legend. Default is an empty string.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">AR</span><span class="p">,</span> <span class="n">SET</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_AR_SET</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span><span class="p">)</span>
+
+		<span class="c1">## plot response</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">SET</span><span class="p">,</span> <span class="n">AR</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;A/R&quot;</span><span class="p">)</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Shielding effectiveness [dB]&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MultilayerStructure.visualize_behavior">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html#LayerOpt.core.MultilayerStructure.visualize_behavior">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">visualize_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span> <span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="s1">&#39;MultilayerProblemSolution&#39;</span><span class="p">],</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span> <span class="p">:</span> <span class="n">PermittivityModel</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Visualize the absorption-to-reflectance ratio (A/R) versus shielding effectiveness (SET).</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			arg : np.ndarray, tuple, or MultilayerProblemSolution</span>
+<span class="sd">				Solution(s) to visualize. Can be a Numpy array, a tuple, or a `MultilayerProblemSolution` object.</span>
+<span class="sd">				If `arg` is a NumPy array or tuple, it is treated as a single solution.</span>
+<span class="sd">				If `arg` is a `MultilayerProblemSolution`, the discrete solution (`x_discrete`) is always plotted,</span>
+<span class="sd">				and the continuous solution (`x_cont`) is plotted unless `only_discrete` is True.</span>
+<span class="sd">			freq_vec : array-like</span>
+<span class="sd">				Frequencies at which to compute and plot the metrics in GHz.</span>
+<span class="sd">			eps_model : PermittivityModel</span>
+<span class="sd">				Model for the permittivity (dielectric constant) of the material.</span>
+<span class="sd">			label : str, default &#39;&#39;</span>
+<span class="sd">				Label for the plot legend.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_visualize_behavior</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">arg</span><span class="o">.</span><span class="n">x_ranges</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_visualize_behavior</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">x_cont</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;solution &#39;</span> <span class="o">+</span> <span class="n">label</span><span class="p">)</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_visualize_behavior</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">x_discrete</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;discrete solution &#39;</span> <span class="o">+</span> <span class="n">label</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_visualize_behavior</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">x_cont</span><span class="p">,</span> <span class="n">freq_vec</span><span class="p">,</span> <span class="n">eps_model</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;continuous solution &#39;</span> <span class="o">+</span> <span class="n">label</span><span class="p">)</span>
+				<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span></div>
+</div>
+
+
+<div class="viewcode-block" id="closest_entries">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.closest_entries.html#LayerOpt.core.closest_entries">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">closest_entries</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Find the `m` entries in an array closest to a given value.</span>
+
+<span class="sd">		This function returns the `m` values from `array` that are nearest to `x`. </span>
+<span class="sd">		If `m` equals the length of `array`, the full array is returned. The returned values</span>
+<span class="sd">		are sorted according to their original order in the array.</span>
+
+<span class="sd">		Parameters</span>
+<span class="sd">		----------</span>
+<span class="sd">		array : np.ndarray</span>
+<span class="sd">			Input array to search.</span>
+<span class="sd">		x : float</span>
+<span class="sd">			Target value to compare against.</span>
+<span class="sd">		m : int</span>
+<span class="sd">			Number of closest entries to return. Must be less than or equal to the length of `array`.</span>
+
+<span class="sd">		Returns</span>
+<span class="sd">		-------</span>
+<span class="sd">		tuple</span>
+<span class="sd">			A tuple containing the `m` entries from `array` closest to `x`, sorted in the same order</span>
+<span class="sd">			as they appear in `array`.</span>
+
+<span class="sd">		Raises</span>
+<span class="sd">		------</span>
+<span class="sd">		AssertionError</span>
+<span class="sd">			If `m` is greater than the length of `array`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+	<span class="k">assert</span><span class="p">(</span><span class="n">m</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">))</span>
+
+	<span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">array</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="c1"># Compute the absolute differences between each entry and x</span>
+		<span class="n">differences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">array</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+		
+		<span class="c1"># Get the indices of the m smallest differences</span>
+		<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argpartition</span><span class="p">(</span><span class="n">differences</span><span class="p">,</span> <span class="n">m</span><span class="p">)[:</span><span class="n">m</span><span class="p">]</span>
+		
+		<span class="c1"># Extract the entries corresponding to these indices</span>
+		<span class="n">closest_entries</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+		
+		<span class="c1"># Sort the closest entries by their original order in the array if needed</span>
+		<span class="n">closest_entries_sorted</span> <span class="o">=</span> <span class="n">closest_entries</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">indices</span><span class="p">])]</span>
+		
+		<span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">closest_entries_sorted</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MultilayerOptimizer">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerOptimizer.html#LayerOpt.core.MultilayerOptimizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultilayerOptimizer</span><span class="p">:</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Class for optimizing multilayer dielectric slab structures.</span>
+
+<span class="sd">		Attributes</span>
+<span class="sd">		----------</span>
+<span class="sd">		structure : MultilayerStructure</span>
+<span class="sd">			The multilayer slab structure to optimize.</span>
+<span class="sd">		eps_model : PermittivityModel</span>
+<span class="sd">			Model for the permittivity (dielectric constant) of the material.</span>
+<span class="sd">		freq_optimize : np.ndarray</span>
+<span class="sd">			Frequencies [GHz] at which to evaluate the optimization objectives.</span>
+<span class="sd">		SE_min : float</span>
+<span class="sd">			Minimum required shielding effectiveness in decibels.</span>
+<span class="sd">		lb : float</span>
+<span class="sd">			Lower bound for material parameters.</span>
+<span class="sd">		ub : float</span>
+<span class="sd">			Upper bound for material parameters.</span>
+<span class="sd">		material_list : np.ndarray</span>
+<span class="sd">			List of material parameters that can be manufactured.</span>
+<span class="sd">		n_discr : int</span>
+<span class="sd">			Number of material parameters to check during optimization at each layer.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MultilayerOptimizer.__init__">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerOptimizer.html#LayerOpt.core.MultilayerOptimizer.__init__">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">:</span> <span class="n">MultilayerStructure</span><span class="p">,</span> <span class="n">eps_model</span><span class="p">:</span> <span class="n">PermittivityModel</span><span class="p">,</span> <span class="n">freq_optimize</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">]),</span> <span class="n">SE_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">lb</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">ub</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">material_list</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">n_discr</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Initialize the optimizer with a structure, permittivity model, and optional settings.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			structure : MultilayerStructure</span>
+<span class="sd">				The multilayer slab structure to optimize.</span>
+<span class="sd">			eps_model : PermittivityModel</span>
+<span class="sd">				Model for the permittivity (dielectric constant) of the material.</span>
+<span class="sd">			freq_optimize : np.ndarray, optional</span>
+<span class="sd">				Frequencies [GHz] at which to evaluate the optimization objectives.</span>
+<span class="sd">				Default is np.array([8, 12]).</span>
+<span class="sd">			SE_min : float, optional</span>
+<span class="sd">				Minimum required shielding effectiveness in decibels. Default is 30.</span>
+<span class="sd">			lb : float, optional</span>
+<span class="sd">				Lower bound for material parameters. Default is 0.0.</span>
+<span class="sd">			ub : float, optional</span>
+<span class="sd">				Upper bound for material parameters. Default is 1.0.</span>
+<span class="sd">			material_list : np.ndarray, optional</span>
+<span class="sd">				List of material parameters that can be manufactured. Default is None.</span>
+<span class="sd">			n_discr : int, optional</span>
+<span class="sd">				Number of material parameters to check during optimization at each layer.</span>
+<span class="sd">				Default is 2.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="n">structure</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">eps_model</span> <span class="o">=</span> <span class="n">eps_model</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">freq_optimize</span> <span class="o">=</span> <span class="n">freq_optimize</span> <span class="k">if</span> <span class="n">freq_optimize</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">SE_min</span> <span class="o">=</span> <span class="n">SE_min</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">lb</span> <span class="o">=</span> <span class="n">lb</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ub</span> <span class="o">=</span> <span class="n">ub</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">material_list</span> <span class="o">=</span> <span class="n">material_list</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">n_discr</span> <span class="o">=</span> <span class="n">n_discr</span></div>
+
+
+	<span class="nd">@property</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">total_t</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;The total thickness of the multilayer dielectric slab structure.&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">total_t</span>
+	
+	<span class="nd">@property</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">n_lay</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;The number of layers of the multilayer dielectric slab structure.&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">n_lay</span>
+
+<div class="viewcode-block" id="MultilayerOptimizer.eval_cost">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerOptimizer.html#LayerOpt.core.MultilayerOptimizer.eval_cost">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">eval_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Evaluate the cost function for a given layer composition. The cost is defined as the </span>
+<span class="sd">			maximum ratio of reflectance to absorption (R/A) across the optimization frequencies.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			float</span>
+<span class="sd">				Maximum R/A ratio across the optimization frequencies.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">get_wave_properties</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_optimize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps_model</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">R</span><span class="o">/</span><span class="n">A</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MultilayerOptimizer.eval_constraint">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerOptimizer.html#LayerOpt.core.MultilayerOptimizer.eval_constraint">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">eval_constraint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Evaluate the shielding effectiveness constraint for a given layer composition.</span>
+
+<span class="sd">			The constraint ensures that the minimum shielding effectiveness across the </span>
+<span class="sd">			optimization frequencies meets the target SE_min. If `impedance_out` is zero, </span>
+<span class="sd">			the constraint is automatically satisfied.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			float</span>
+<span class="sd">				Constraint value in dB; positive or zero  if the design satisfies the SE_min requirement, </span>
+<span class="sd">				strictly negative if it does not.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">impedance_out</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">return</span> <span class="mi">0</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">get_wave_properties</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_optimize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps_model</span><span class="p">)</span>
+			<span class="k">return</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">T</span><span class="p">))</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">SE_min</span></div>
+
+
+<div class="viewcode-block" id="MultilayerOptimizer.eval_brute_cost">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerOptimizer.html#LayerOpt.core.MultilayerOptimizer.eval_brute_cost">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">eval_brute_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Evaluate a cost function for brute-force optimization with constraint handling.</span>
+
+<span class="sd">			If the shielding effectiveness constraint is violated, a large penalty is returned; </span>
+<span class="sd">			otherwise, the normal cost (maximum R/A) is computed.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x : array-like</span>
+<span class="sd">				Material parameters for each layer in the multilayer structure.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			float</span>
+<span class="sd">				Penalized cost: either a large number if the constraint is violated or the maximum R/A ratio.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_constraint</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="k">return</span> <span class="mi">10</span><span class="o">**</span><span class="mi">8</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_cost</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MultilayerOptimizer.optimize">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerOptimizer.html#LayerOpt.core.MultilayerOptimizer.optimize">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_0</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Optimize the material parameters for each layer in  multilayer dielectric slab structure to minimize R/A while satisfying shielding constraints.</span>
+<span class="sd">			</span>
+<span class="sd">			This method performs a two-step optimization:</span>
+
+<span class="sd">			1. Continuous optimization using a basin-hopping algorithm with bounds on the material parameters and shielding effectiveness (SE) constraints.</span>
+<span class="sd">			2. If `self.material_list` is not `None`, an additional brute-force search is performed among layer stacks with material parameters in `self.material_list` that are close to the continuous solution. This 2-step procedure is then repeated multiple times to explore nearby minima.</span>
+
+<span class="sd">			Warning</span>
+<span class="sd">			-------</span>
+<span class="sd">			Only use this method with relatively small `self.n_discr` values, as the brute-force step can become computationally expensive.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x_0 : array-like</span>
+<span class="sd">				Initial guess for the layer Material parameters.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			MultilayerProblemSolution</span>
+<span class="sd">				MultilayerProblemSolution object containing the initial, continuous, and discrete solutions, their corresponding cost values,</span>
+<span class="sd">				the ranges used for discrete optimization, and timing information for precompilation and both optimization steps.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="c1"># Optimizer options</span>
+		<span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;maxiter&quot;</span><span class="p">:</span> <span class="mf">1e4</span><span class="p">,</span> <span class="s2">&quot;disp&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+		<span class="n">bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">lb</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ub</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_0</span><span class="p">))]</span>
+
+		<span class="c1"># Precompile cost function using JIT</span>
+		<span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">eval_cost</span><span class="p">(</span><span class="n">x_0</span><span class="p">)</span>
+		<span class="n">toc</span> <span class="o">=</span>  <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+		<span class="n">precompile_time</span> <span class="o">=</span> <span class="n">toc</span> <span class="o">-</span> <span class="n">tic</span>
+
+
+		<span class="k">def</span><span class="w"> </span><span class="nf">optimization_step</span><span class="p">(</span><span class="n">x_0</span><span class="p">):</span>
+			<span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+			<span class="n">opt</span> <span class="o">=</span> <span class="n">basinhopping</span><span class="p">(</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">eval_cost</span><span class="p">,</span> 
+				<span class="n">x_0</span><span class="p">,</span> 
+				<span class="n">minimizer_kwargs</span><span class="o">=</span><span class="p">{</span>
+					<span class="c1"># &quot;method&quot;:&quot;SLSQP&quot;, </span>
+					<span class="s2">&quot;bounds&quot;</span><span class="p">:</span><span class="n">bounds</span><span class="p">,</span> 
+					<span class="s2">&quot;constraints&quot;</span><span class="p">:{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ineq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_constraint</span><span class="p">},</span> 
+					<span class="s2">&quot;options&quot;</span><span class="p">:</span><span class="n">options</span>
+				<span class="p">},</span> 
+				<span class="n">niter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+				<span class="n">T</span><span class="o">=</span><span class="mf">0.1</span>
+			<span class="p">)</span>
+			<span class="n">toc</span> <span class="o">=</span>  <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+			<span class="n">sol_time_cont</span> <span class="o">=</span> <span class="n">toc</span> <span class="o">-</span> <span class="n">tic</span>
+
+			<span class="k">if</span> <span class="n">opt</span><span class="p">[</span><span class="s1">&#39;lowest_optimization_result&#39;</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+				<span class="nb">print</span><span class="p">(</span><span class="n">opt</span><span class="p">[</span><span class="s1">&#39;lowest_optimization_result&#39;</span><span class="p">][</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
+
+			<span class="c1"># Returns final x value of the continuous optimizer</span>
+			<span class="n">x_cont</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">x</span>
+			<span class="n">f_cont</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fun</span>
+
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">material_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+			
+				<span class="c1"># Apply the function to each element in the input array</span>
+				<span class="n">x_ranges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">closest_entries</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">material_list</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_discr</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">x_cont</span><span class="p">])</span>
+
+				<span class="c1"># Discrete optimization</span>
+				<span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+				<span class="n">x_points</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">x_ranges</span><span class="p">))</span>
+				<span class="k">with</span> <span class="n">mp</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">())</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+					<span class="n">x_results</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_brute_cost</span><span class="p">,</span> <span class="n">x_points</span><span class="p">)</span>
+				<span class="n">x_discrete</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_points</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">x_results</span><span class="p">)])</span>
+				<span class="n">toc</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+				<span class="n">sol_time_discrete</span> <span class="o">=</span> <span class="n">toc</span> <span class="o">-</span> <span class="n">tic</span>
+				<span class="n">f_discrete</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_cost</span><span class="p">(</span><span class="n">x_discrete</span><span class="p">)</span>
+
+				<span class="k">return</span> <span class="n">x_cont</span><span class="p">,</span> <span class="n">f_cont</span><span class="p">,</span> <span class="n">x_discrete</span><span class="p">,</span> <span class="n">f_discrete</span><span class="p">,</span> <span class="n">x_ranges</span><span class="p">,</span> <span class="n">sol_time_cont</span><span class="p">,</span> <span class="n">sol_time_discrete</span>
+
+			<span class="k">else</span><span class="p">:</span>
+
+				<span class="k">return</span> <span class="n">x_cont</span><span class="p">,</span> <span class="n">f_cont</span><span class="p">,</span> <span class="n">x_cont</span><span class="p">,</span> <span class="n">f_cont</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sol_time_cont</span><span class="p">,</span> <span class="mi">0</span>
+
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting optimization&#39;</span><span class="p">)</span>
+		<span class="n">x_cont</span><span class="p">,</span> <span class="n">f_cont</span><span class="p">,</span> <span class="n">x_discrete</span><span class="p">,</span> <span class="n">f_discrete</span><span class="p">,</span> <span class="n">x_ranges</span><span class="p">,</span> <span class="n">sol_time_cont</span><span class="p">,</span> <span class="n">sol_time_discrete</span> <span class="o">=</span> <span class="n">optimization_step</span><span class="p">(</span><span class="n">x_0</span><span class="p">)</span>
+
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">material_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Finished initial optimization, checking nearby region for other minima&#39;</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">):</span>
+				<span class="n">x_cont_new</span><span class="p">,</span> <span class="n">f_cont_new</span><span class="p">,</span> <span class="n">x_discrete_new</span><span class="p">,</span> <span class="n">f_discrete_new</span><span class="p">,</span> <span class="n">x_ranges_new</span><span class="p">,</span> <span class="n">delta_sol_time_cont</span><span class="p">,</span> <span class="n">delta_sol_time_discrete</span> <span class="o">=</span> <span class="n">optimization_step</span><span class="p">(</span><span class="n">x_discrete</span><span class="p">)</span>
+
+				<span class="n">sol_time_cont</span> <span class="o">+=</span> <span class="n">delta_sol_time_cont</span>
+				<span class="n">sol_time_discrete</span> <span class="o">+=</span> <span class="n">delta_sol_time_discrete</span>
+
+				<span class="k">if</span> <span class="n">f_discrete_new</span> <span class="o">&gt;=</span> <span class="n">f_discrete</span> <span class="o">-</span> <span class="mf">1e-12</span><span class="p">:</span>
+					<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No better local minima found, optimization completed.&#39;</span><span class="p">)</span>
+					<span class="k">break</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="n">x_cont</span><span class="p">,</span> <span class="n">f_cont</span><span class="p">,</span> <span class="n">x_discrete</span><span class="p">,</span> <span class="n">f_discrete</span><span class="p">,</span> <span class="n">x_ranges</span> <span class="o">=</span> <span class="n">x_cont_new</span><span class="p">,</span> <span class="n">f_cont_new</span><span class="p">,</span> <span class="n">x_discrete_new</span><span class="p">,</span> <span class="n">f_discrete_new</span><span class="p">,</span> <span class="n">x_ranges_new</span>
+					<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iteration &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;: reduced A/R by &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">f_discrete_new</span> <span class="o">-</span> <span class="n">f_discrete</span><span class="p">))</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Finished continuous optimization, no discrete optimization performed since material_list is None&#39;</span><span class="p">)</span>
+		
+		<span class="k">return</span> <span class="n">MultilayerProblemSolution</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">x_cont</span><span class="p">,</span> <span class="n">f_cont</span><span class="p">,</span> <span class="n">x_discrete</span><span class="p">,</span> <span class="n">f_discrete</span><span class="p">,</span> <span class="n">x_ranges</span><span class="p">,</span> <span class="n">precompile_time</span><span class="p">,</span> <span class="n">sol_time_cont</span><span class="p">,</span> <span class="n">sol_time_discrete</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MultilayerOptimizer.visualize_optimization">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerOptimizer.html#LayerOpt.core.MultilayerOptimizer.visualize_optimization">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">visualize_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">MP_sol</span><span class="p">,</span> <span class="n">x_0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Plot the initial, continuous, and discrete optimization solutions for the material parameters across the multilayer dielectric slab structure.</span>
+<span class="sd">			Grid lines are added to indicate which discrete material parameters were considered during the brute-force step of the optimization procedure (if applicable).</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			MP_sol : MultilayerProblemSolution</span>
+<span class="sd">				MultilayerProblemSolution object containing the initial, continuous, and discrete solutions, along with the ranges used for discrete optimization.</span>
+<span class="sd">			x_0 : array-like, optional</span>
+<span class="sd">				Initial guess for the material properties across layers. If None, the initial guess stored in `MP_sol` is used.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="n">MP_sol</span><span class="o">.</span><span class="n">x_ranges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">x_mins</span> <span class="o">=</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">MP_sol</span><span class="o">.</span><span class="n">x_ranges</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+			<span class="n">x_maxs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">MP_sol</span><span class="o">.</span><span class="n">x_ranges</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+				<span class="n">x_mins</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">MP_sol</span><span class="o">.</span><span class="n">x_ranges</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+				<span class="n">x_maxs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">MP_sol</span><span class="o">.</span><span class="n">x_ranges</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+
+			<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_discr</span><span class="p">):</span>
+				<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">MP_sol</span><span class="o">.</span><span class="n">x_ranges</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">total_t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">total_t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+			
+			<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">total_t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+				<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_mins</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x_maxs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+			<span class="n">plt</span><span class="o">.</span><span class="n">stairs</span><span class="p">(</span><span class="n">MP_sol</span><span class="o">.</span><span class="n">x_0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">total_t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;initial guess&#39;</span><span class="p">)</span>
+			<span class="n">plt</span><span class="o">.</span><span class="n">stairs</span><span class="p">(</span><span class="n">MP_sol</span><span class="o">.</span><span class="n">x_cont</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">total_t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;continuous solution&#39;</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+			<span class="n">plt</span><span class="o">.</span><span class="n">stairs</span><span class="p">(</span><span class="n">MP_sol</span><span class="o">.</span><span class="n">x_discrete</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">total_t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;discrete solution&#39;</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">plt</span><span class="o">.</span><span class="n">stairs</span><span class="p">(</span><span class="n">MP_sol</span><span class="o">.</span><span class="n">x_0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">total_t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;initial guess&#39;</span><span class="p">)</span>
+			<span class="n">plt</span><span class="o">.</span><span class="n">stairs</span><span class="p">(</span><span class="n">MP_sol</span><span class="o">.</span><span class="n">x_cont</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">total_t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lay</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;solution&#39;</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+		
+		<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">lb</span> <span class="o">-</span> <span class="mf">0.1</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ub</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">lb</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">ub</span> <span class="o">+</span> <span class="mf">0.1</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ub</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">lb</span><span class="p">)])</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">total_t</span><span class="p">,</span><span class="mf">1.1</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">total_t</span><span class="p">])</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Thickness [m]&#39;</span><span class="p">)</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+		<span class="n">interactive</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+</div>
+
+
+
+
+<div class="viewcode-block" id="MultilayerProblemSolution">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerProblemSolution.html#LayerOpt.core.MultilayerProblemSolution">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultilayerProblemSolution</span><span class="p">:</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Class for storing the optimization results of a multilayer dielectric slab structure.</span>
+
+<span class="sd">		Attributes</span>
+<span class="sd">		----------</span>
+<span class="sd">		x_0 : array-like</span>
+<span class="sd">			Initial guess for the material parameters across layers.</span>
+<span class="sd">		x_cont : array-like</span>
+<span class="sd">			Material parameters obtained from the continuous optimization step.</span>
+<span class="sd">		f_cont : float</span>
+<span class="sd">			Cost value corresponding to the continuous solution (e.g., maximum R/A ratio).</span>
+<span class="sd">		x_discrete : array-like</span>
+<span class="sd">			Material parameters obtained from the discrete optimization step.</span>
+<span class="sd">		f_discrete : float</span>
+<span class="sd">			Cost value corresponding to the discrete solution.</span>
+<span class="sd">		x_ranges : np.ndarray</span>
+<span class="sd">			Discrete material parameter ranges considered for each layer during brute-force optimization.</span>
+<span class="sd">		precompile_time : float</span>
+<span class="sd">			Time taken to precompile the cost function or perform initial computations (seconds).</span>
+<span class="sd">		sol_time_cont : float</span>
+<span class="sd">			Time taken for the continuous optimization step (seconds).</span>
+<span class="sd">		sol_time_discrete : float</span>
+<span class="sd">			Time taken for the discrete optimization step (seconds).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MultilayerProblemSolution.__init__">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerProblemSolution.html#LayerOpt.core.MultilayerProblemSolution.__init__">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">x_cont</span><span class="p">,</span> <span class="n">f_cont</span><span class="p">,</span> <span class="n">x_discrete</span><span class="p">,</span> <span class="n">f_discrete</span><span class="p">,</span> <span class="n">x_ranges</span><span class="p">,</span> <span class="n">precompile_time</span><span class="p">,</span> <span class="n">sol_time_cont</span><span class="p">,</span> <span class="n">sol_time_discrete</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Initialize an MultilayerProblemSolution instance with all relevant optimization outputs.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			x_0 : array-like</span>
+<span class="sd">				Initial guess for the material parameters across layers.</span>
+<span class="sd">			x_cont : array-like</span>
+<span class="sd">				Material parameters obtained from the continuous optimization step.</span>
+<span class="sd">			f_cont : float</span>
+<span class="sd">				Cost value corresponding to the continuous solution.</span>
+<span class="sd">			x_discrete : array-like</span>
+<span class="sd">				Material parameters obtained from the discrete optimization step.</span>
+<span class="sd">			f_discrete : float</span>
+<span class="sd">				Cost value corresponding to the discrete solution.</span>
+<span class="sd">			x_ranges : np.ndarray</span>
+<span class="sd">				Discrete material parameter ranges considered for each layer.</span>
+<span class="sd">			precompile_time : float</span>
+<span class="sd">				Time taken to precompile the cost function or perform initial computations (seconds).</span>
+<span class="sd">			sol_time_cont : float</span>
+<span class="sd">				Time taken for the continuous optimization step (seconds).</span>
+<span class="sd">			sol_time_discrete : float</span>
+<span class="sd">				Time taken for the discrete optimization step (seconds).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">x_0</span> <span class="o">=</span> <span class="n">x_0</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">x_cont</span> <span class="o">=</span> <span class="n">x_cont</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">f_cont</span> <span class="o">=</span> <span class="n">f_cont</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">x_discrete</span> <span class="o">=</span> <span class="n">x_discrete</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">f_discrete</span> <span class="o">=</span> <span class="n">f_discrete</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">x_ranges</span> <span class="o">=</span> <span class="n">x_ranges</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">precompile_time</span> <span class="o">=</span> <span class="n">precompile_time</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">sol_time_cont</span> <span class="o">=</span> <span class="n">sol_time_cont</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">sol_time_discrete</span> <span class="o">=</span> <span class="n">sol_time_discrete</span></div>
+
+
+	<span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Return a human-readable string representation of the optimization results, </span>
+<span class="sd">			displayed when using `print()` on the object.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">floatmode</span><span class="o">=</span><span class="s1">&#39;fixed&#39;</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">10e5</span><span class="p">)</span>
+		<span class="n">x_0_str</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_0</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+		<span class="n">x_cont_str</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_cont</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+		<span class="n">x_discrete_str</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_discrete</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+		
+		<span class="k">return</span> <span class="p">(</span><span class="s2">&quot;-------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;MultilayerProblemSolution:</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="s2">&quot;-------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="s2">&quot;                cost max(R/A)   Material parameters</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  x_0:          -               </span><span class="si">{</span><span class="n">x_0_str</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  x_cont:       </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">f_cont</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">        </span><span class="si">{</span><span class="n">x_cont_str</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  x_discrete:   </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">f_discrete</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">        </span><span class="si">{</span><span class="n">x_discrete_str</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="s2">&quot;-------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  precompile_time:    </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">precompile_time</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  sol_time_cont:      </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sol_time_cont</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  sol_time_discrete:  </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sol_time_discrete</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="s2">&quot;------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+	<span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Return a detailed string representation of the object for debugging.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">floatmode</span><span class="o">=</span><span class="s1">&#39;fixed&#39;</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">10e5</span><span class="p">)</span>
+		<span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MultilayerProblemSolution(</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  x_0 =        </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x_0</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  x_cont =     </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x_cont</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  f_cont =     </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">f_cont</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  x_discrete = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x_discrete</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  f_discrete = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">f_discrete</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  x_ranges =  </span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x_ranges</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  precompile_time =   </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">precompile_time</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  sol_time_cont =     </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sol_time_cont</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;  sol_time_discrete = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sol_time_discrete</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MultilayerLearner">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerLearner.html#LayerOpt.core.MultilayerLearner">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultilayerLearner</span><span class="p">:</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Class for learning the permittivity model parameters from experimental measurements.</span>
+
+<span class="sd">		This class provides methods to evaluate the error between measured and predicted </span>
+<span class="sd">		quantities (transmittance, reflectance, absorption, S-parameters) and to optimize </span>
+<span class="sd">		the permittivity model parameters by minimizing these errors.</span>
+
+<span class="sd">		Attributes</span>
+<span class="sd">		----------</span>
+<span class="sd">		measurements : ExperimentData</span>
+<span class="sd">			Object containing experimental measurements of the multilayer structures.</span>
+<span class="sd">		eps_model : PermittivityModel</span>
+<span class="sd">			Model for the permittivity (dielectric constant) of the material, whose parameters </span>
+<span class="sd">			will be optimized.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MultilayerLearner.__init__">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerLearner.html#LayerOpt.core.MultilayerLearner.__init__">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">measurements</span><span class="p">:</span> <span class="n">ExperimentData</span><span class="p">,</span> <span class="n">eps_model</span> <span class="p">:</span> <span class="n">PermittivityModel</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">measurements</span> <span class="o">=</span> <span class="n">measurements</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">eps_model</span> <span class="o">=</span> <span class="n">eps_model</span></div>
+
+
+<div class="viewcode-block" id="MultilayerLearner.cost_relative_SET_AR">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerLearner.html#LayerOpt.core.MultilayerLearner.cost_relative_SET_AR">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">cost_relative_SET_AR</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Return a callable cost function computing squared relative errors for</span>
+<span class="sd">			shielding effectiveness (SET) and absorption-to-reflectance ratio (A/R).</span>
+
+<span class="sd">			Usage:</span>
+<span class="sd">				learner.optimize(p0, cost_fun=learner.cost_relative_SET_AR())</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">def</span><span class="w"> </span><span class="nf">cost</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+			<span class="n">errors_SET</span><span class="p">,</span> <span class="n">errors_AR</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">eps_model</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span>
+
+			<span class="k">for</span> <span class="n">experiment</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_names</span><span class="p">():</span>
+				<span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">structure</span><span class="p">[</span><span class="n">experiment</span><span class="p">]</span><span class="o">.</span><span class="n">get_wave_properties</span><span class="p">(</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_material_parameters</span><span class="p">(</span><span class="n">experiment</span><span class="p">),</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_X</span><span class="p">(</span><span class="n">experiment</span><span class="p">),</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">eps_model</span>
+				<span class="p">)</span>
+				<span class="n">T_meas</span><span class="p">,</span> <span class="n">R_meas</span><span class="p">,</span> <span class="n">A_meas</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_T</span><span class="p">(</span><span class="n">experiment</span><span class="p">),</span>
+										<span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_R</span><span class="p">(</span><span class="n">experiment</span><span class="p">),</span>
+										<span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_A</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span>
+				<span class="n">SET_meas</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">T_meas</span><span class="p">)</span>
+				<span class="n">AR_meas</span> <span class="o">=</span> <span class="n">A_meas</span><span class="o">/</span><span class="n">R_meas</span>
+
+				<span class="n">errors_SET</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">SET_meas</span><span class="p">)</span><span class="o">/</span><span class="n">SET_meas</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+				<span class="n">errors_AR</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="n">A</span><span class="o">/</span><span class="n">R</span> <span class="o">-</span> <span class="n">AR_meas</span><span class="p">)</span><span class="o">/</span><span class="n">AR_meas</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+			<span class="k">return</span> <span class="p">(</span><span class="n">errors_SET</span> <span class="o">+</span> <span class="n">errors_AR</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+
+		<span class="k">return</span> <span class="n">cost</span></div>
+
+
+<div class="viewcode-block" id="MultilayerLearner.cost_coeffs">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerLearner.html#LayerOpt.core.MultilayerLearner.cost_coeffs">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">cost_coeffs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Return a callable cost function computing squared errors on T, R, A coefficients.</span>
+
+<span class="sd">			Usage:</span>
+<span class="sd">				learner.optimize(p0, cost_fun=learner.cost_coeffs())</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">def</span><span class="w"> </span><span class="nf">cost</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+			<span class="n">errors_T</span><span class="p">,</span> <span class="n">errors_R</span><span class="p">,</span> <span class="n">errors_A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">eps_model</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">p</span>
+
+			<span class="k">for</span> <span class="n">experiment</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_names</span><span class="p">():</span>
+				<span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">structure</span><span class="p">[</span><span class="n">experiment</span><span class="p">]</span><span class="o">.</span><span class="n">get_wave_properties</span><span class="p">(</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_material_parameters</span><span class="p">(</span><span class="n">experiment</span><span class="p">),</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_X</span><span class="p">(</span><span class="n">experiment</span><span class="p">),</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">eps_model</span>
+				<span class="p">)</span>
+				<span class="n">errors_T</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_T</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+				<span class="n">errors_R</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_R</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+				<span class="n">errors_A</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">get_A</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+
+			<span class="k">return</span> <span class="p">(</span><span class="n">errors_T</span> <span class="o">+</span> <span class="n">errors_R</span> <span class="o">+</span> <span class="n">errors_A</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+
+		<span class="k">return</span> <span class="n">cost</span></div>
+
+
+<div class="viewcode-block" id="MultilayerLearner.optimize">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.core.MultilayerLearner.html#LayerOpt.core.MultilayerLearner.optimize">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">cost_fun</span><span class="p">,</span> <span class="n">niter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mf">1e4</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Optimizes the permittivity model parameters by minimizing a provided cost function</span>
+<span class="sd">			using a basin-hopping algorithm.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			p0 : array-like</span>
+<span class="sd">				Initial guess for the permittivity model parameters.</span>
+<span class="sd">			cost_fun : callable</span>
+<span class="sd">				Function that takes a parameter vector and returns a scalar cost.</span>
+<span class="sd">			niter : int, optional</span>
+<span class="sd">				Number of basin-hopping iterations.</span>
+<span class="sd">			T : float, optional</span>
+<span class="sd">				Temperature parameter for basin-hopping.</span>
+<span class="sd">			maxiter : int, optional</span>
+<span class="sd">				Maximum iterations for the local minimizer.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			optimal_params : np.ndarray</span>
+<span class="sd">				Optimized permittivity model parameters.</span>
+<span class="sd">			optimal_cost : float</span>
+<span class="sd">				Value of the cost function at the optimum.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;starting optimization&#39;</span><span class="p">)</span>
+		<span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+		<span class="n">opt</span> <span class="o">=</span> <span class="n">basinhopping</span><span class="p">(</span>
+			<span class="n">cost_fun</span><span class="p">,</span> 
+			<span class="n">p0</span><span class="p">,</span> 
+			<span class="n">minimizer_kwargs</span><span class="o">=</span><span class="p">{</span>
+				<span class="s2">&quot;bounds&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">eps_model</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span>
+				<span class="s2">&quot;options&quot;</span><span class="p">:{</span><span class="s2">&quot;maxiter&quot;</span><span class="p">:</span> <span class="n">maxiter</span><span class="p">,</span> <span class="s2">&quot;disp&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+			<span class="p">},</span> 
+			<span class="n">niter</span><span class="o">=</span><span class="n">niter</span><span class="p">,</span>
+			<span class="n">T</span><span class="o">=</span><span class="n">T</span>
+		<span class="p">)</span>
+		<span class="n">toc</span> <span class="o">=</span>  <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+		<span class="n">sol_time_cont</span> <span class="o">=</span> <span class="n">toc</span> <span class="o">-</span> <span class="n">tic</span>
+
+		<span class="nb">print</span><span class="p">(</span><span class="n">opt</span><span class="p">[</span><span class="s1">&#39;lowest_optimization_result&#39;</span><span class="p">][</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
+
+		<span class="n">optimal_params</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">x</span>
+		<span class="n">optimal_cost</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fun</span>
+
+		<span class="k">return</span> <span class="n">optimal_params</span><span class="p">,</span> <span class="n">optimal_cost</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Brecht Evens.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

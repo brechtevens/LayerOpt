@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LayerOpt.Permittivity &mdash; LayerOpt 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LayerOpt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Navigation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#installing-layeropt">Installing LayerOpt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#testing-your-installation">Testing Your Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#permittivity-models">Permittivity Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#multilayerstructure">MultilayerStructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#learning-permittivity-models">Learning Permittivity Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#optimizing-multilayer-structures">Optimizing Multilayer Structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../background.html">Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../background.html#multilayer-dielectric-slab-structures">Multilayer Dielectric Slab Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../background.html#learning-permittivity-model">Learning Permittivity Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../background.html#optimizing-material-parameters">Optimizing Material Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../module_permittivity.html">LayerOpt.Permittivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.PermittivityModel.html">LayerOpt.Permittivity.PermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.LinearPermittivityModel.html">LayerOpt.Permittivity.LinearPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.QuadraticPermittivityModel.html">LayerOpt.Permittivity.QuadraticPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.LinearSplinePermittivityModel.html">LayerOpt.Permittivity.LinearSplinePermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.QuadraticSplinePermittivityModel.html">LayerOpt.Permittivity.QuadraticSplinePermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.SimpleLinearPermittivityModel.html">LayerOpt.Permittivity.SimpleLinearPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticPermittivityModel.html">LayerOpt.Permittivity.SimpleQuadraticPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.html">LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../module_multilayer.html">LayerOpt.core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html">LayerOpt.core.MultilayerStructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerOptimizer.html">LayerOpt.core.MultilayerOptimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerLearner.html">LayerOpt.core.MultilayerLearner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerProblemSolution.html">LayerOpt.core.MultilayerProblemSolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.closest_entries.html">LayerOpt.core.closest_entries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../module_data.html">LayerOpt.Experiment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html">LayerOpt.Experiment.ExperimentData</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LayerOpt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">LayerOpt.Permittivity</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for LayerOpt.Permittivity</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
+
+<span class="n">tolerance</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">8</span>
+
+<div class="viewcode-block" id="PermittivityModel">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.PermittivityModel.html#LayerOpt.Permittivity.PermittivityModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PermittivityModel</span><span class="p">:</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+	<span class="n">p_extra</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Base class for defining parametric forms of the permittivity (ε) of a material. We use the convention that</span>
+
+<span class="sd">		    ε = ε&#39; + iε″, with ε″ &lt; 0 for lossy materials.</span>
+
+<span class="sd">		Attributes</span>
+<span class="sd">		----------</span>
+<span class="sd">		p : np.ndarray</span>
+<span class="sd">			Model parameters of the permittivity model.</span>
+<span class="sd">		p_extra : np.ndarray</span>
+<span class="sd">			Extra model parameters that may be used in specific models.</span>
+<span class="sd">		bounds : list of tuple</span>
+<span class="sd">			Bounds on the model parameters, typically used to ensure physically meaningful values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PermittivityModel.__init__">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.PermittivityModel.html#LayerOpt.Permittivity.PermittivityModel.__init__">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Initialize the permittivity model with the given parameters or defaults.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			params : array-like, optional</span>
+<span class="sd">				Parameters for the permittivity model. If None, defaults are used from `get_default_params`.</span>
+<span class="sd">			bounds : array-like of tuple, optional</span>
+<span class="sd">				Bounds on the model parameters. If None, defaults are used from `get_default_bounds`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_default_params</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+		
+		<span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">bounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_default_bounds</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">bounds</span></div>
+
+
+<div class="viewcode-block" id="PermittivityModel.get_default_params">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.PermittivityModel.html#LayerOpt.Permittivity.PermittivityModel.get_default_params">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Returns the default parameters for the permittivity model.&quot;&quot;&quot;</span>
+		<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This method should be implemented by subclasses.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PermittivityModel.get_default_bounds">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.PermittivityModel.html#LayerOpt.Permittivity.PermittivityModel.get_default_bounds">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Returns the default bounds on the parameters of the permittivity model.&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">)]</span></div>
+
+
+	<span class="nd">@staticmethod</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Real part of the permittivity (ε&#39;).</span>
+<span class="sd">			</span>
+<span class="sd">			Parameters:</span>
+<span class="sd">			x : float - Material parameter.</span>
+<span class="sd">			f : float - Frequency of the incoming wave [GHz]</span>
+<span class="sd">			p : array-like - Model parameters.</span>
+<span class="sd">			p_extra : array-like - Additional, fixed model parameters</span>
+<span class="sd">			</span>
+<span class="sd">			Returns:</span>
+<span class="sd">			float - Real permittivity (ε&#39;)</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This method should be implemented by subclasses.&quot;</span><span class="p">)</span>
+	
+	<span class="nd">@staticmethod</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Imaginary part of the permittivity (ε&#39;&#39;).</span>
+<span class="sd">			</span>
+<span class="sd">			Parameters:</span>
+<span class="sd">			x : float - Material parameter.</span>
+<span class="sd">			f : float - Frequency of the incoming wave [GHz]</span>
+<span class="sd">			p : array-like - Model parameters</span>
+<span class="sd">			p_extra : array-like - Additional, fixed model parameters</span>
+<span class="sd">			</span>
+<span class="sd">			Returns:</span>
+<span class="sd">			float - Imaginary permittivity (ε&#39;&#39;)</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This method should be implemented by subclasses.&quot;</span><span class="p">)</span>
+	
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">,</span> <span class="n">real_permittivity</span><span class="p">,</span> <span class="n">imaginary_permittivity</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute complex permittivity (ε = ε&#39; + iε&#39;&#39;).</span>
+<span class="sd">			</span>
+<span class="sd">			Parameters:</span>
+<span class="sd">			x : array-like - Array of material parameters.</span>
+<span class="sd">			f : float - Frequency of the incoming wave [GHz]</span>
+<span class="sd">			p : array-like - Model parameters</span>
+<span class="sd">			p_extra : array-like - Additional, fixed model parameters</span>
+<span class="sd">			real_permittivity : callable - Function to compute ε&#39;</span>
+<span class="sd">			imaginary_permittivity : callable - Function to compute ε&#39;&#39;</span>
+<span class="sd">			</span>
+<span class="sd">			Returns:</span>
+<span class="sd">			np.ndarray - Complex permittivity (ε = ε&#39; + iε&#39;&#39;)</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">permittivity_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+			<span class="n">real_part</span> <span class="o">=</span> <span class="n">real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">)</span>
+			<span class="n">imag_part</span> <span class="o">=</span> <span class="n">imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">)</span>
+			<span class="n">permittivity_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">real_part</span> <span class="o">+</span> <span class="n">imag_part</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+		<span class="k">return</span> <span class="n">permittivity_list</span>
+	
+<div class="viewcode-block" id="PermittivityModel.evaluate_permittivity">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.PermittivityModel.html#LayerOpt.Permittivity.PermittivityModel.evaluate_permittivity">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_permittivity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p_extra</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Evaluate complex permittivity for given inputs.</span>
+<span class="sd">			</span>
+<span class="sd">			Parameters:</span>
+<span class="sd">			x : array-like - Array of material parameters.</span>
+<span class="sd">			f : float - Frequency of the incoming wave [GHz]</span>
+<span class="sd">			p : array-like - Model parameters, optional (defaults to self.p)</span>
+<span class="sd">			p_extra : array-like - Additional, fixed parameters, optional (defaults to self.p_extra)</span>
+<span class="sd">			</span>
+<span class="sd">			Returns:</span>
+<span class="sd">			np.ndarray - Complex permittivity (ε = ε&#39; + iε&#39;&#39;)</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+			<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">):</span>
+				<span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Custom parameter vector must have length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">p_extra</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">p_extra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_real_permittivity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_imaginary_permittivity</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SimpleLinearPermittivityModel">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.SimpleLinearPermittivityModel.html#LayerOpt.Permittivity.SimpleLinearPermittivityModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimpleLinearPermittivityModel</span><span class="p">(</span><span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Linear permittivity model.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SimpleLinearPermittivityModel.get_default_params">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.SimpleLinearPermittivityModel.html#LayerOpt.Permittivity.SimpleLinearPermittivityModel.get_default_params">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.19759538e-15</span><span class="p">,</span> <span class="mf">3.97364581e-16</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.64069767e-15</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.59883062e+00</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="SimpleLinearPermittivityModel.get_default_bounds">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.SimpleLinearPermittivityModel.html#LayerOpt.Permittivity.SimpleLinearPermittivityModel.get_default_bounds">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="p">[(</span><span class="n">tolerance</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">tolerance</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">]</span></div>
+
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="LinearPermittivityModel">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.LinearPermittivityModel.html#LayerOpt.Permittivity.LinearPermittivityModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LinearPermittivityModel</span><span class="p">(</span><span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Linear permittivity model with frequency dependence.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LinearPermittivityModel.get_default_params">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.LinearPermittivityModel.html#LayerOpt.Permittivity.LinearPermittivityModel.get_default_params">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.19759538e-15</span><span class="p">,</span> <span class="mf">3.97364581e-16</span><span class="p">,</span> <span class="mf">2.71758059e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.64069767e-15</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.59883062e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.66581826e-16</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="LinearPermittivityModel.get_default_bounds">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.LinearPermittivityModel.html#LayerOpt.Permittivity.LinearPermittivityModel.get_default_bounds">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="p">[(</span><span class="n">tolerance</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">tolerance</span><span class="p">)]</span><span class="o">*</span><span class="mi">3</span><span class="p">]</span></div>
+
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">f</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="n">f</span></div>
+
+
+<div class="viewcode-block" id="SimpleQuadraticPermittivityModel">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticPermittivityModel.html#LayerOpt.Permittivity.SimpleQuadraticPermittivityModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimpleQuadraticPermittivityModel</span><span class="p">(</span><span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Quadratic permittivity model.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SimpleQuadraticPermittivityModel.get_default_params">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticPermittivityModel.html#LayerOpt.Permittivity.SimpleQuadraticPermittivityModel.get_default_params">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">2.09924225</span><span class="p">,</span>  <span class="mf">1.50079415</span><span class="p">,</span>  <span class="mf">5.35061839</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.13599982</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.30072558</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.21634402</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="SimpleQuadraticPermittivityModel.get_default_bounds">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticPermittivityModel.html#LayerOpt.Permittivity.SimpleQuadraticPermittivityModel.get_default_bounds">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="p">[(</span><span class="n">tolerance</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">tolerance</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+	<span class="c1"># def get_default_bounds(self):</span>
+	<span class="c1"># 	return [*[(-np.inf, np.inf)]*4, *[(-np.inf, np.inf)]*4]</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="QuadraticPermittivityModel">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.QuadraticPermittivityModel.html#LayerOpt.Permittivity.QuadraticPermittivityModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QuadraticPermittivityModel</span><span class="p">(</span><span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Quadratic permittivity model.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="QuadraticPermittivityModel.get_default_params">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.QuadraticPermittivityModel.html#LayerOpt.Permittivity.QuadraticPermittivityModel.get_default_params">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">2.09924225</span><span class="p">,</span>  <span class="mf">1.50079415</span><span class="p">,</span>  <span class="mf">0.17569648</span><span class="p">,</span>  <span class="mf">5.35061839</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.13599982</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.30072558</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.10727507</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.21634402</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="QuadraticPermittivityModel.get_default_bounds">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.QuadraticPermittivityModel.html#LayerOpt.Permittivity.QuadraticPermittivityModel.get_default_bounds">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="p">[(</span><span class="n">tolerance</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">tolerance</span><span class="p">)]</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+	<span class="c1"># def get_default_bounds(self):</span>
+	<span class="c1"># 	return [*[(-np.inf, np.inf)]*4, *[(-np.inf, np.inf)]*4]</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">f</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">*</span><span class="n">f</span></div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PiecewisePermittivityModel</span><span class="p">(</span><span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Piecewise linear permittivity model with linear frequency dependence.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+	<span class="nd">@classmethod</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_params</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.51007617e-18</span><span class="p">,</span> <span class="mf">3.47751481e+00</span><span class="p">,</span> <span class="mf">6.91864652e+01</span><span class="p">,</span> <span class="mf">2.23849603e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.18885276e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.02113460e+01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.10159188e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.25000000e-20</span><span class="p">])</span>
+
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="p">[(</span><span class="n">tolerance</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">tolerance</span><span class="p">)]</span><span class="o">*</span><span class="mi">4</span><span class="p">]</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="n">x_switch</span> <span class="o">=</span> <span class="mi">6</span>
+		<span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">x_switch</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">f</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x_switch</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_switch</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">f</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="n">x_switch</span> <span class="o">=</span> <span class="mi">6</span>
+		<span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">x_switch</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">*</span><span class="n">f</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="n">x_switch</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_switch</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">*</span><span class="n">f</span>
+
+
+<div class="viewcode-block" id="LinearSplinePermittivityModel">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.LinearSplinePermittivityModel.html#LayerOpt.Permittivity.LinearSplinePermittivityModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LinearSplinePermittivityModel</span><span class="p">(</span><span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Linear spline permittivity model.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LinearSplinePermittivityModel.__init__">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.LinearSplinePermittivityModel.html#LayerOpt.Permittivity.LinearSplinePermittivityModel.__init__">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Initialize the permittivity model with the given parameters or defaults.&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span> <span class="o">=</span> <span class="n">nodes</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LinearSplinePermittivityModel.get_default_params">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.LinearSplinePermittivityModel.html#LayerOpt.Permittivity.LinearSplinePermittivityModel.get_default_params">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="o">*</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">*</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="LinearSplinePermittivityModel.get_default_bounds">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.LinearSplinePermittivityModel.html#LayerOpt.Permittivity.LinearSplinePermittivityModel.get_default_bounds">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="p">[</span>
+			<span class="o">*</span><span class="p">[(</span><span class="n">tolerance</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">),</span>
+			<span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">tolerance</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span>
+			<span class="p">]</span></div>
+
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+			<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">f</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="n">delta</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span>
+		<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">delta</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">delta</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">delta</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">delta</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+			<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">f</span></div>
+
+
+
+<div class="viewcode-block" id="SimpleQuadraticSplinePermittivityModel">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.html#LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimpleQuadraticSplinePermittivityModel</span><span class="p">(</span><span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Quadratic spline permittivity model.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SimpleQuadraticSplinePermittivityModel.__init__">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.html#LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.__init__">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Initialize the permittivity model with the given parameters or defaults.&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span> <span class="o">=</span> <span class="n">nodes</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SimpleQuadraticSplinePermittivityModel.get_default_params">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.html#LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.get_default_params">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+			<span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="o">*</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+			<span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="o">*</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span></div>
+
+
+<div class="viewcode-block" id="SimpleQuadraticSplinePermittivityModel.get_default_bounds">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.html#LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.get_default_bounds">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="p">[</span>
+			<span class="o">*</span><span class="p">[(</span><span class="n">tolerance</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+			<span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+			<span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">tolerance</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+			<span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+			<span class="p">]</span></div>
+
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="n">grad</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+			<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">grad</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+			<span class="n">b</span> <span class="o">=</span> <span class="n">grad</span> <span class="o">-</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+			<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="n">delta</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span>
+		<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">delta</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">delta</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">delta</span><span class="o">+</span><span class="mi">2</span><span class="p">:</span><span class="n">delta</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="n">grad</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+			<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">grad</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+			<span class="n">b</span> <span class="o">=</span> <span class="n">grad</span> <span class="o">-</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+			<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="QuadraticSplinePermittivityModel">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.QuadraticSplinePermittivityModel.html#LayerOpt.Permittivity.QuadraticSplinePermittivityModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QuadraticSplinePermittivityModel</span><span class="p">(</span><span class="n">PermittivityModel</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Quadratic spline permittivity model.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="QuadraticSplinePermittivityModel.__init__">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.QuadraticSplinePermittivityModel.html#LayerOpt.Permittivity.QuadraticSplinePermittivityModel.__init__">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Initialize the permittivity model with the given parameters or defaults.&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span> <span class="o">=</span> <span class="n">nodes</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="QuadraticSplinePermittivityModel.get_default_params">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.QuadraticSplinePermittivityModel.html#LayerOpt.Permittivity.QuadraticSplinePermittivityModel.get_default_params">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+			<span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">*</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+			<span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">*</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span></div>
+
+
+<div class="viewcode-block" id="QuadraticSplinePermittivityModel.get_default_bounds">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Permittivity.QuadraticSplinePermittivityModel.html#LayerOpt.Permittivity.QuadraticSplinePermittivityModel.get_default_bounds">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_default_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="p">[</span>
+			<span class="o">*</span><span class="p">[(</span><span class="n">tolerance</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+			<span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+			<span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">tolerance</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+			<span class="o">*</span><span class="p">[(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+			<span class="p">]</span></div>
+
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_real_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="n">grad</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+			<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">grad</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+			<span class="n">b</span> <span class="o">=</span> <span class="n">grad</span> <span class="o">-</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+			<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">f</span>
+
+	<span class="nd">@staticmethod</span>
+	<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">def</span><span class="w"> </span><span class="nf">_compute_imaginary_permittivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">p_extra</span><span class="p">):</span>
+		<span class="n">delta</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span>
+		<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">delta</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">delta</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">delta</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="n">delta</span><span class="o">+</span><span class="mi">3</span><span class="p">:</span><span class="n">delta</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_extra</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+			<span class="n">grad</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+			<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">grad</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+			<span class="n">b</span> <span class="o">=</span> <span class="n">grad</span> <span class="o">-</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">p_extra</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+			<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">f</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Brecht Evens.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

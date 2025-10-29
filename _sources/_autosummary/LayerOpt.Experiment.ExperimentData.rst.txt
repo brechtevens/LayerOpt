@@ -1,0 +1,55 @@
+﻿LayerOpt.Experiment.ExperimentData
+==================================
+
+.. currentmodule:: LayerOpt.Experiment
+
+.. autoclass:: ExperimentData
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ExperimentData.__init__
+      ~ExperimentData.get_A
+      ~ExperimentData.get_AR_SET
+      ~ExperimentData.get_R
+      ~ExperimentData.get_S11
+      ~ExperimentData.get_S21
+      ~ExperimentData.get_T
+      ~ExperimentData.get_X
+      ~ExperimentData.get_Y
+      ~ExperimentData.get_duplicate_experiments
+      ~ExperimentData.get_material_parameters
+      ~ExperimentData.get_names
+      ~ExperimentData.get_unique_experiments
+      ~ExperimentData.get_worst_case_AR_SET
+      ~ExperimentData.load_experiment
+      ~ExperimentData.load_experiment_data
+      ~ExperimentData.load_overview
+      ~ExperimentData.plot_behavior
+      ~ExperimentData.plot_coefficients
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ExperimentData.n
+      ~ExperimentData.reverse
+      ~ExperimentData.directory
+      ~ExperimentData.wt
+      ~ExperimentData.layer_thickness
+      ~ExperimentData.impedance_in
+      ~ExperimentData.impedance_out
+      ~ExperimentData.structure
+      ~ExperimentData.X
+      ~ExperimentData.Y
+   
+   

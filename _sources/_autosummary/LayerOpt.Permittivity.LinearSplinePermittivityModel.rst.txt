@@ -1,0 +1,32 @@
+﻿LayerOpt.Permittivity.LinearSplinePermittivityModel
+===================================================
+
+.. currentmodule:: LayerOpt.Permittivity
+
+.. autoclass:: LinearSplinePermittivityModel
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LinearSplinePermittivityModel.__init__
+      ~LinearSplinePermittivityModel.evaluate_permittivity
+      ~LinearSplinePermittivityModel.get_default_bounds
+      ~LinearSplinePermittivityModel.get_default_params
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LinearSplinePermittivityModel.p
+      ~LinearSplinePermittivityModel.p_extra
+   
+   
