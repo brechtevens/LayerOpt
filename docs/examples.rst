@@ -108,6 +108,8 @@ This example demonstrates how to:
    :linenos:
    :caption: Example - Using the ExperimentData class
 
+.. _learning_permittivity_models:
+
 Learning Permittivity Models
 ----------------------------
 
@@ -136,6 +138,8 @@ This example demonstrates how to:
    In this example, a custom cost function is used that only penalizes errors in R (reflectance). 
    This illustrates how the choice of cost function affects the predicted coefficients: R is accurately matched, but T and A are not. 
    To optimize across all coefficients (T, R, A) and compare, re-run the script using ``cost_fun = learner.cost_coeffs()``.
+
+.. _optimizing_multilayer_structures:
 
 Optimizing Multilayer Structures
 --------------------------------

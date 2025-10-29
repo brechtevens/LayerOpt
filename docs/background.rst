@@ -63,35 +63,28 @@ The shielding effectiveness is
 Learning Permittivity Model
 ---------------------------
 
-LayerOpt learns the mapping from material parameters to complex permittivity and permeability using experimental or simulated data.  
-A parametric model :math:`\epsilon(x_i, p)` is fit by minimizing the error between predicted and measured absorption/reflection ratios and :math:`\text{SE}`:
-
-.. math::
-
-   p^* = \arg\min_{p \in \mathcal P} \sum_{s=1}^S \sum_{f \in \mathcal V} 
-   \Big[
-     \text{e}_{\rm rel}\Big(\frac{A_{\rm model}^f(x^s, p)}{R_{\rm model}^f(x^s, p)}, \frac{A_{\rm exp}^f}{R_{\rm exp}^f}\Big)^2
-     +
-     \text{e}_{\rm rel}\Big(\text{SE}_{\rm model}^f(x^s, p), \text{SE}_{\rm exp}^f\Big)^2
-   \Big]
-
+LayerOpt learns a mapping from material parameters to complex permittivity
+and permeability using experimental or simulated data.  
+The parametric model :math:`\epsilon(x_i, p)` is fit by minimizing a user-defined cost function.  
+For example, one may minimize the error between predicted and measured
+absorption-to-reflection ratios and shielding effectiveness. The framework allows arbitrary loss functions, so users can implement custom objectives that prioritize specific metrics, frequency bands, or robustness criteria.
+See :ref:`learning_permittivity_models` for more details.
 
 Optimizing Material Parameters
 ------------------------------
 
-The optimization problem for designing multilayer shields is
+The goal of optimization within this python package is to design multilayer shields that maximize the worst-case ratio of absorption to reflection while satisfying a minimum shielding effectiveness requirement.  
 
-.. math::
+The optimization workflow typically consists of two stages:
 
-     \text{maximize}_{x_1, \dots, x_M \in \mathcal W} \quad
-     \min_{f \in \mathcal{V}} (\frac{A_{\rm model}^f(x)}{R_{\rm model}^f(x)})
-     \quad\text{subject to} \quad
-     \text{SE}_{\rm min} \le \min_{f \in \mathcal{V}} \text{SE}_{\rm model}^f(x)
+1. **Continuous Relaxation**  
+   Solve over all valid material parameters using a global optimizer
+   (e.g., basin-hopping or differential evolution). This produces high-quality
+   continuous solutions efficiently.
 
-The optimization procedure consists of two steps.
+2. **Discrete Search**  
+   In case the designer is only able to manufacture a discrete set of material parameters, an additional brute-force search step is added to look for the best discrete solution near the continuous one.
 
-1. **Continuous Relaxation**: Solve over continuous ranges of :math:`\mathcal W` using a global optimizer (e.g., basin-hopping).  
-2. **Discrete Search**: Reduce the search space to nearest discrete options per layer and perform a brute-force search.
-
-This ensures **sample-efficient learning** while producing high-performance multilayer sequences.
-
+This two-stage approach ensures **sample-efficient learning** while producing
+high-performance multilayer sequences that meet design constraints.
+See :ref:`optimizing_multilayer_structures` for more details.
