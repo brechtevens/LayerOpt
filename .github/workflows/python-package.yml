@@ -5,10 +5,9 @@ name: Python package
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "brechtevens-windows-test" ]
   pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+    branches: [ "brechtevens-windows-test" ]
 
 jobs:
   build:
