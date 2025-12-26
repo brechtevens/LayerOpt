@@ -1,8 +1,9 @@
+import os
 import numpy as np
 from numba import jit, njit, prange
 
 from scipy.optimize import basinhopping
-import multiprocessing as mp
+from joblib import Parallel, delayed
 import itertools
 
 import matplotlib.pyplot as plt
@@ -51,7 +52,7 @@ class MultilayerStructure:
 		return float(self.t*self.n_lay)
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def get_k0(f):
 		"""
 			Computes the free-space wavenumber of a wave with a given frequency.
@@ -703,8 +704,9 @@ class MultilayerOptimizer:
 				# Discrete optimization
 				tic = time.perf_counter()
 				x_points = list(itertools.product(*x_ranges))
-				with mp.Pool(mp.cpu_count()) as pool:
-					x_results = pool.map(self.eval_brute_cost, x_points)
+				x_results = Parallel(n_jobs=max(1, os.cpu_count()-1), backend="threading")(
+					delayed(self.eval_brute_cost)(x) for x in x_points
+				)
 				x_discrete = np.array(x_points[np.argmin(x_results)])
 				toc = time.perf_counter()
 				sol_time_discrete = toc - tic

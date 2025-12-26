@@ -54,7 +54,7 @@ class SqrtPermittivityModel(PermittivityModel):
         Always use
         
         @staticmethod
-        @njit(cache=True)
+        @njit
         
         to ensure compatibility with
         Numba-accelerated calculations in MultilayerStructure.
@@ -69,12 +69,12 @@ class SqrtPermittivityModel(PermittivityModel):
         return [*[(1e-6, np.inf)]*3, *[(-np.inf, -1e-6)]*3]
 
     @staticmethod
-    @njit(cache=True)
+    @njit
     def _compute_real_permittivity(x, f, p, p_extra):
         return p[0] + p[1]*np.sqrt(x) + p[2]*f
 
     @staticmethod
-    @njit(cache=True)
+    @njit
     def _compute_imaginary_permittivity(x, f, p, p_extra):
         return p[3] + p[4]*np.sqrt(x) + p[5]*f
 

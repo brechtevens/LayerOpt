@@ -14,13 +14,13 @@ class MockPermittivityModel:
         self.p_extra = None
 
     @staticmethod
-    @njit(cache=True)
+    @njit
     def _compute_real_permittivity(x, f, p, p_extra):
         # Constant real part -> nondispersive dielectric
         return 1.0
 
     @staticmethod
-    @njit(cache=True)
+    @njit
     def _compute_imaginary_permittivity(x, f, p, p_extra):
         # No losses
         return 0.0

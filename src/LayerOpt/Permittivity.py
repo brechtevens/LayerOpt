@@ -81,7 +81,7 @@ class PermittivityModel:
 		raise NotImplementedError("This method should be implemented by subclasses.")
 	
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_permittivity(x, f, p, p_extra, real_permittivity, imaginary_permittivity):
 		"""
 			Compute complex permittivity (ε = ε' + iε'').
@@ -140,12 +140,12 @@ class SimpleLinearPermittivityModel(PermittivityModel):
 		return [*[(tolerance, np.inf)]*2, *[(-np.inf, -tolerance)]*2]
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_real_permittivity(x, f, p, p_extra):
 		return p[0] + p[1]*x
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_imaginary_permittivity(x, f, p, p_extra):
 		return p[2] + p[3]*x
 
@@ -161,12 +161,12 @@ class LinearPermittivityModel(PermittivityModel):
 		return [*[(tolerance, np.inf)]*3, *[(-np.inf, -tolerance)]*3]
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_real_permittivity(x, f, p, p_extra):
 		return p[0] + p[1]*x + p[2]*f
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_imaginary_permittivity(x, f, p, p_extra):
 		return p[3] + p[4]*x + p[5]*f
 
@@ -185,12 +185,12 @@ class SimpleQuadraticPermittivityModel(PermittivityModel):
 	# 	return [*[(-np.inf, np.inf)]*4, *[(-np.inf, np.inf)]*4]
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_real_permittivity(x, f, p, p_extra):
 		return p[0] + p[1]*x + 1/2*p[2]*x**2
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_imaginary_permittivity(x, f, p, p_extra):
 		return p[3] + p[4]*x + 1/2*p[5]*x**2
 
@@ -209,12 +209,12 @@ class QuadraticPermittivityModel(PermittivityModel):
 	# 	return [*[(-np.inf, np.inf)]*4, *[(-np.inf, np.inf)]*4]
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_real_permittivity(x, f, p, p_extra):
 		return p[0] + p[1]*x + 1/2*p[3]*x**2 + p[2]*f
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_imaginary_permittivity(x, f, p, p_extra):
 		return p[4] + p[5]*x + 1/2*p[7]*x**2 + p[6]*f
 
@@ -232,7 +232,7 @@ class PiecewisePermittivityModel(PermittivityModel):
 		return [*[(tolerance, np.inf)]*4, *[(-np.inf, -tolerance)]*4]
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_real_permittivity(x, f, p, p_extra):
 		x_switch = 6
 		if x <= x_switch:
@@ -241,7 +241,7 @@ class PiecewisePermittivityModel(PermittivityModel):
 			return p[0] + p[1]*x_switch + p[2]*(x-x_switch) + p[3]*f
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_imaginary_permittivity(x, f, p, p_extra):
 		x_switch = 6
 		if x <= x_switch:
@@ -270,7 +270,7 @@ class LinearSplinePermittivityModel(PermittivityModel):
 			]
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_real_permittivity(x, f, p, p_extra):
 		a, b, c = p[0], p[1:len(p_extra)+2], p[len(p_extra)+2]
 		i = 0
@@ -280,7 +280,7 @@ class LinearSplinePermittivityModel(PermittivityModel):
 		return a + b[i]*x + c*f
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_imaginary_permittivity(x, f, p, p_extra):
 		delta = len(p_extra)+3
 		a, b, c = p[delta], p[delta+1:delta+len(p_extra)+2], p[delta+len(p_extra)+2]
@@ -315,7 +315,7 @@ class SimpleQuadraticSplinePermittivityModel(PermittivityModel):
 			]
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_real_permittivity(x, f, p, p_extra):
 		a, b, d = p[0], p[1], p[2:len(p_extra)+3]
 		i = 0
@@ -327,7 +327,7 @@ class SimpleQuadraticSplinePermittivityModel(PermittivityModel):
 		return a + b*x + 1/2*d[i]*x**2
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_imaginary_permittivity(x, f, p, p_extra):
 		delta = len(p_extra)+3
 		a, b, d = p[delta], p[delta+1], p[delta+2:delta+len(p_extra)+3]
@@ -363,7 +363,7 @@ class QuadraticSplinePermittivityModel(PermittivityModel):
 			]
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_real_permittivity(x, f, p, p_extra):
 		a, b, c, d = p[0], p[1], p[2], p[3:len(p_extra)+4]
 		i = 0
@@ -375,7 +375,7 @@ class QuadraticSplinePermittivityModel(PermittivityModel):
 		return a + b*x + 1/2*d[i]*x**2 + c*f
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def _compute_imaginary_permittivity(x, f, p, p_extra):
 		delta = len(p_extra)+4
 		a, b, c, d = p[delta], p[delta+1], p[delta+2], p[delta+3:delta+len(p_extra)+4]
