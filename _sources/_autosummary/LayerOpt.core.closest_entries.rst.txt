@@ -1,0 +1,6 @@
+﻿LayerOpt.core.closest\_entries
+==============================
+
+.. currentmodule:: LayerOpt.core
+
+.. autofunction:: closest_entries

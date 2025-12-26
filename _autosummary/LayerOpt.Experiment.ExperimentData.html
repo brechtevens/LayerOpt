@@ -1,0 +1,695 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LayerOpt.Experiment.ExperimentData &mdash; LayerOpt 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="LayerOpt.Experiment" href="../module_data.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            LayerOpt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Navigation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installing-layeropt">Installing LayerOpt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#testing-your-installation">Testing Your Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#permittivity-models">Permittivity Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#multilayerstructure">MultilayerStructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#learning-permittivity-models">Learning Permittivity Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#optimizing-multilayer-structures">Optimizing Multilayer Structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../background.html#multilayer-dielectric-slab-structures">Multilayer Dielectric Slab Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../background.html#learning-permittivity-model">Learning Permittivity Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../background.html#optimizing-material-parameters">Optimizing Material Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module_permittivity.html">LayerOpt.Permittivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.PermittivityModel.html">LayerOpt.Permittivity.PermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.LinearPermittivityModel.html">LayerOpt.Permittivity.LinearPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.QuadraticPermittivityModel.html">LayerOpt.Permittivity.QuadraticPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.LinearSplinePermittivityModel.html">LayerOpt.Permittivity.LinearSplinePermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.QuadraticSplinePermittivityModel.html">LayerOpt.Permittivity.QuadraticSplinePermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.SimpleLinearPermittivityModel.html">LayerOpt.Permittivity.SimpleLinearPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.SimpleQuadraticPermittivityModel.html">LayerOpt.Permittivity.SimpleQuadraticPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.html">LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../module_multilayer.html">LayerOpt.core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.core.MultilayerStructure.html">LayerOpt.core.MultilayerStructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.core.MultilayerOptimizer.html">LayerOpt.core.MultilayerOptimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.core.MultilayerLearner.html">LayerOpt.core.MultilayerLearner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.core.MultilayerProblemSolution.html">LayerOpt.core.MultilayerProblemSolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.core.closest_entries.html">LayerOpt.core.closest_entries</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module_data.html">LayerOpt.Experiment</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">LayerOpt.Experiment.ExperimentData</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LayerOpt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../module_data.html">LayerOpt.Experiment</a></li>
+      <li class="breadcrumb-item active">LayerOpt.Experiment.ExperimentData</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/LayerOpt.Experiment.ExperimentData.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="layeropt-experiment-experimentdata">
+<h1>LayerOpt.Experiment.ExperimentData<a class="headerlink" href="#layeropt-experiment-experimentdata" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LayerOpt.Experiment.</span></span><span class="sig-name descname"><span class="pre">ExperimentData</span></span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Dataclass for managing and loading experimental multilayer measurement data.</p>
+<p>This class loads experiment metadata (material parameters, multilayer structure, characteristic impedance of the outgoing medium)
+and S-parameter data (S11, S21, S12, S22) from a given directory. It also provides core methods to
+compute transmission, reflection, and absorption coefficients, as well as derived metrics
+such as A/R and shielding effectiveness (SET).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<em>str</em>) – Path to the directory containing experiment CSV files and the <cite>overview.csv</cite> file.</p></li>
+<li><p><strong>reverse</strong> (<em>bool</em>) – If True, also considers ‘reversed’ versions of the experiments by considering not only the forward
+S11 and S21 measurements but also the reverse S22 and S21 measurements. Note that this is only allowed
+when all experiments have free air om both sides of the multilayer stack, i.e., the characteristic
+impedance of the last, outgoing medium is equal to one.</p></li>
+<li><p><strong>wt</strong> (<em>dict</em><em> of </em><em>{str: np.ndarray}</em>) – Dictionary mapping experiment names to the corresponding list of material parameters of each layer.</p></li>
+<li><p><strong>layer_thickness</strong> (<em>dict</em><em> of </em><em>{str: float}</em>) – Dictionary mapping experiment names to the corresponding layer thickness.</p></li>
+<li><p><strong>impedance_out</strong> (<em>dict</em><em> of </em><em>{str: float}</em>) – Dictionary mapping experiment names to the corresponding characteristic impedance of the final, outgoing medium.</p></li>
+<li><p><strong>structure</strong> (<em>dict</em><em> of </em><em>{str: MultilayerStructure}</em>) – Dictionary mapping experiment names to the corresponding MultilayerStructure.</p></li>
+<li><p><strong>X</strong> (<em>dict</em><em> of </em><em>{str: np.ndarray}</em>) – Dictionary mapping experiment names to the corresponding frequencies.
+Each entry is a 1D NumPy array of frequency points (in GHz) extracted from the corresponding experiment CSV file.</p></li>
+<li><p><strong>Y</strong> (<em>dict</em><em> of </em><em>{str: np.ndarray}</em>) – Dictionary mapping experiment names to the corresponding complex-valued S-parameters, stored as a 2xL array where
+the first row contains S11 and the second row contains S21.
+Magnitude and phase data from the CSV file (e.g., <cite>db:Trc1_S11</cite>, <cite>ang:Trc1_S11</cite>, etc.) are combined into these complex quantities.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Number of VNA measurements in the dataset.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The class expects a file named <cite>overview.csv</cite> in the given directory, which defines the material parameters
+of each experiment, as well as the layer thickness and optionally the characteristic impedance of the last, outgoing medium.
+This is typically equal to one (free space) but can, for instance, be set to zero to represent a reflective material.</p>
+<p>Each experiment listed in <cite>overview.csv</cite> should be accompanied by a corresponding CSV file containing S-parameter
+data with columns named <cite>db:Trc…</cite> and <cite>ang:Trc…</cite> measured by a vector network analyzer. The files are automatically parsed, converted
+into complex S-parameters, and stored for analysis.</p>
+<p class="rubric">Examples</p>
+<p>Load all experiments from a directory:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">ExperimentData</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="s1">&#39;../measurements/&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get_names</span><span class="p">())</span>
+<span class="go">dict_keys([&#39;sample1&#39;, &#39;sample2&#39;, &#39;sample3&#39;])</span>
+</pre></div>
+</div>
+<p>Retrieve and plot A/R versus shielding effectiveness for one experiment:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">plot_behavior</span><span class="p">(</span><span class="s1">&#39;sample1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Get computed coefficients:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get_T</span><span class="p">(</span><span class="s1">&#39;sample1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get_R</span><span class="p">(</span><span class="s1">&#39;sample1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get_A</span><span class="p">(</span><span class="s1">&#39;sample1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wt=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_thickness=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impedance_in=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impedance_out=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n=0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<em>str</em>)</p></li>
+<li><p><strong>reverse</strong> (<em>bool</em>)</p></li>
+<li><p><strong>wt</strong> (<em>dict</em>)</p></li>
+<li><p><strong>layer_thickness</strong> (<em>dict</em>)</p></li>
+<li><p><strong>impedance_in</strong> (<em>dict</em>)</p></li>
+<li><p><strong>impedance_out</strong> (<em>dict</em>)</p></li>
+<li><p><strong>structure</strong> (<em>dict</em>)</p></li>
+<li><p><strong>X</strong> (<em>dict</em>)</p></li>
+<li><p><strong>Y</strong> (<em>dict</em>)</p></li>
+<li><p><strong>n</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id0" title="LayerOpt.Experiment.ExperimentData.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(directory[, reverse, wt, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_A" title="LayerOpt.Experiment.ExperimentData.get_A"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_A</span></code></a>(experiment_name)</p></td>
+<td><p>Compute the absorptance coefficient for a given experiment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_AR_SET" title="LayerOpt.Experiment.ExperimentData.get_AR_SET"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_AR_SET</span></code></a>(experiment_name)</p></td>
+<td><p>Compute the A/R ratio and shielding effectiveness (SET) for a given experiment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_R" title="LayerOpt.Experiment.ExperimentData.get_R"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_R</span></code></a>(experiment_name)</p></td>
+<td><p>Compute the reflectance coefficient for a given experiment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_S11" title="LayerOpt.Experiment.ExperimentData.get_S11"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_S11</span></code></a>(experiment_name)</p></td>
+<td><p>Returns the measured S11-parameters for a specific experiment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_S21" title="LayerOpt.Experiment.ExperimentData.get_S21"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_S21</span></code></a>(experiment_name)</p></td>
+<td><p>Returns the measured S21-parameters for a specific experiment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_T" title="LayerOpt.Experiment.ExperimentData.get_T"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_T</span></code></a>(experiment_name)</p></td>
+<td><p>Compute the transmittance coefficient for a given experiment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_X" title="LayerOpt.Experiment.ExperimentData.get_X"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_X</span></code></a>(experiment_name)</p></td>
+<td><p>Returns the frequency vector for a specific experiment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_Y" title="LayerOpt.Experiment.ExperimentData.get_Y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_Y</span></code></a>(experiment_name)</p></td>
+<td><p>Returns the measured S11- and S21-parameters for a specific experiment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_duplicate_experiments" title="LayerOpt.Experiment.ExperimentData.get_duplicate_experiments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_duplicate_experiments</span></code></a>()</p></td>
+<td><p>Find experiments that occur more than once.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_material_parameters" title="LayerOpt.Experiment.ExperimentData.get_material_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_material_parameters</span></code></a>(experiment_name)</p></td>
+<td><p>Returns the material parameters for a specific experiment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_names" title="LayerOpt.Experiment.ExperimentData.get_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_names</span></code></a>()</p></td>
+<td><p>Returns the names of all loaded experiments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_unique_experiments" title="LayerOpt.Experiment.ExperimentData.get_unique_experiments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_unique_experiments</span></code></a>()</p></td>
+<td><p>Group experiments by their material parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.get_worst_case_AR_SET" title="LayerOpt.Experiment.ExperimentData.get_worst_case_AR_SET"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_worst_case_AR_SET</span></code></a>(experiment_name)</p></td>
+<td><p>Compute the worst-case (minimum) values of A/R and SET for a given experiment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.load_experiment" title="LayerOpt.Experiment.ExperimentData.load_experiment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_experiment</span></code></a>(filename)</p></td>
+<td><p>Load S-parameter data for a single experiment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.load_experiment_data" title="LayerOpt.Experiment.ExperimentData.load_experiment_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_experiment_data</span></code></a>()</p></td>
+<td><p>Load all experiment data from the given directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.load_overview" title="LayerOpt.Experiment.ExperimentData.load_overview"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_overview</span></code></a>()</p></td>
+<td><p>Load the material parameter data and experiment setup metadata from the file <cite>overview.csv</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.plot_behavior" title="LayerOpt.Experiment.ExperimentData.plot_behavior"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_behavior</span></code></a>(experiment_name)</p></td>
+<td><p>Plot the measured A/R ratio versus shielding effectiveness (SET) for a given experiment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.plot_coefficients" title="LayerOpt.Experiment.ExperimentData.plot_coefficients"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_coefficients</span></code></a>(experiment_name)</p></td>
+<td><p>Plot the measured reflectance (R) versus transmittance (T) for a given experiment.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.n" title="LayerOpt.Experiment.ExperimentData.n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.reverse" title="LayerOpt.Experiment.ExperimentData.reverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reverse</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.directory" title="LayerOpt.Experiment.ExperimentData.directory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">directory</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.wt" title="LayerOpt.Experiment.ExperimentData.wt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wt</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.layer_thickness" title="LayerOpt.Experiment.ExperimentData.layer_thickness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">layer_thickness</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.impedance_in" title="LayerOpt.Experiment.ExperimentData.impedance_in"><code class="xref py py-obj docutils literal notranslate"><span class="pre">impedance_in</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.impedance_out" title="LayerOpt.Experiment.ExperimentData.impedance_out"><code class="xref py py-obj docutils literal notranslate"><span class="pre">impedance_out</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.structure" title="LayerOpt.Experiment.ExperimentData.structure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">structure</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.X" title="LayerOpt.Experiment.ExperimentData.X"><code class="xref py py-obj docutils literal notranslate"><span class="pre">X</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.Experiment.ExperimentData.Y" title="LayerOpt.Experiment.ExperimentData.Y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Y</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.X">
+<span class="sig-name descname"><span class="pre">X</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.X" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.Y">
+<span class="sig-name descname"><span class="pre">Y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.Y" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wt=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_thickness=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impedance_in=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">impedance_out=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structure=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n=0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<em>str</em>)</p></li>
+<li><p><strong>reverse</strong> (<em>bool</em>)</p></li>
+<li><p><strong>wt</strong> (<em>dict</em>)</p></li>
+<li><p><strong>layer_thickness</strong> (<em>dict</em>)</p></li>
+<li><p><strong>impedance_in</strong> (<em>dict</em>)</p></li>
+<li><p><strong>impedance_out</strong> (<em>dict</em>)</p></li>
+<li><p><strong>structure</strong> (<em>dict</em>)</p></li>
+<li><p><strong>X</strong> (<em>dict</em>)</p></li>
+<li><p><strong>Y</strong> (<em>dict</em>)</p></li>
+<li><p><strong>n</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.directory">
+<span class="sig-name descname"><span class="pre">directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.directory" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_A">
+<span class="sig-name descname"><span class="pre">get_A</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_A"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_A" title="Link to this definition"></a></dt>
+<dd><p>Compute the absorptance coefficient for a given experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Absorptance values calculated as 1 - T - R.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_AR_SET">
+<span class="sig-name descname"><span class="pre">get_AR_SET</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_AR_SET"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_AR_SET" title="Link to this definition"></a></dt>
+<dd><p>Compute the A/R ratio and shielding effectiveness (SET) for a given experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A/R ratio and shielding effectiveness (in dB), respectively.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple of np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_R">
+<span class="sig-name descname"><span class="pre">get_R</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_R"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_R" title="Link to this definition"></a></dt>
+<dd><p>Compute the reflectance coefficient for a given experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reflectance values calculated as <span class="math notranslate nohighlight">\(|S_{11}|^2\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_S11">
+<span class="sig-name descname"><span class="pre">get_S11</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_S11"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_S11" title="Link to this definition"></a></dt>
+<dd><p>Returns the measured S11-parameters for a specific experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of complex S11-parameters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_S21">
+<span class="sig-name descname"><span class="pre">get_S21</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_S21"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_S21" title="Link to this definition"></a></dt>
+<dd><p>Returns the measured S21-parameters for a specific experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of complex S21-parameters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_T">
+<span class="sig-name descname"><span class="pre">get_T</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_T"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_T" title="Link to this definition"></a></dt>
+<dd><p>Compute the transmittance coefficient for a given experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Transmittance values calculated as <span class="math notranslate nohighlight">\(|S_{21}|^2\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_X">
+<span class="sig-name descname"><span class="pre">get_X</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_X"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_X" title="Link to this definition"></a></dt>
+<dd><p>Returns the frequency vector for a specific experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1D array of frequency values in GHz.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_Y">
+<span class="sig-name descname"><span class="pre">get_Y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_Y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_Y" title="Link to this definition"></a></dt>
+<dd><p>Returns the measured S11- and S21-parameters for a specific experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2xL array of complex S-parameters where the first row corresponds to S11
+and the second row corresponds to S21.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For ‘_reverse’ experiments, the first row corresponds to the S22- and the second
+to the S21-parameters of the original (non-reversed) experiment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_duplicate_experiments">
+<span class="sig-name descname"><span class="pre">get_duplicate_experiments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_duplicate_experiments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_duplicate_experiments" title="Link to this definition"></a></dt>
+<dd><p>Find experiments that occur more than once.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary mapping tuples of material parameters to lists of experiment names
+that have identical material parameters (i.e., appear more than once).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function only considers the material parameters. An experiment is
+considered a <cite>real duplicate</cite> if the layer thickness and the characteristic
+impedance of the outgoing medium are also identical.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_material_parameters">
+<span class="sig-name descname"><span class="pre">get_material_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_material_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_material_parameters" title="Link to this definition"></a></dt>
+<dd><p>Returns the material parameters for a specific experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of material parameters associated with the experiment.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_names">
+<span class="sig-name descname"><span class="pre">get_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_names" title="Link to this definition"></a></dt>
+<dd><p>Returns the names of all loaded experiments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Names of all loaded experiments.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_unique_experiments">
+<span class="sig-name descname"><span class="pre">get_unique_experiments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_unique_experiments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_unique_experiments" title="Link to this definition"></a></dt>
+<dd><p>Group experiments by their material parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary mapping tuples of material parameters to lists of experiment names
+that share those material parameters.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.get_worst_case_AR_SET">
+<span class="sig-name descname"><span class="pre">get_worst_case_AR_SET</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.get_worst_case_AR_SET"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.get_worst_case_AR_SET" title="Link to this definition"></a></dt>
+<dd><p>Compute the worst-case (minimum) values of A/R and SET for a given experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Minimum A/R ratio and minimum shielding effectiveness (in dB) across all measured frequencies.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.impedance_in">
+<span class="sig-name descname"><span class="pre">impedance_in</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.impedance_in" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.impedance_out">
+<span class="sig-name descname"><span class="pre">impedance_out</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.impedance_out" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.layer_thickness">
+<span class="sig-name descname"><span class="pre">layer_thickness</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.layer_thickness" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.load_experiment">
+<span class="sig-name descname"><span class="pre">load_experiment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.load_experiment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.load_experiment" title="Link to this definition"></a></dt>
+<dd><p>Load S-parameter data for a single experiment.</p>
+<p>This method parses a CSV file containing frequency-dependent S-parameter
+magnitude (in dB) and phase (in degrees) data measured by a vector network analyzer.
+The complex-valued coefficients (S11, S21, S12, S22) are reconstructed and stored.
+If the <cite>reverse</cite> flag is set, reversed measurements are also added (S22, S12), with the string
+“_reverse” added to the original experiment name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Name of the CSV file containing the experiment data.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – If the CSV file contains unsupported column names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.load_experiment_data">
+<span class="sig-name descname"><span class="pre">load_experiment_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.load_experiment_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.load_experiment_data" title="Link to this definition"></a></dt>
+<dd><p>Load all experiment data from the given directory.</p>
+<p>This method first loads the material parameter data and experiment setup metadata from <cite>overview.csv</cite>,
+then iterates over all other CSV files in the directory to load S-parameter data for each experiment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.load_overview">
+<span class="sig-name descname"><span class="pre">load_overview</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.load_overview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.load_overview" title="Link to this definition"></a></dt>
+<dd><p>Load the material parameter data and experiment setup metadata from the file <cite>overview.csv</cite>.</p>
+<p>This method reads a CSV file that defines the material parameters, layer thickness,
+and optionally the outgoing medium impedance for each experiment. It also
+instantiates a <cite>MultilayerStructure</cite> object for each experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If <cite>overview.csv</cite> cannot be found in the specified directory.</p></li>
+<li><p><strong>NotImplementedError</strong> – If <cite>reverse = True</cite> but one of the experiments in <cite>overview.csv</cite> has a characteristic impedance of the last, outgoing medium which is not equal to one.</p></li>
+<li><p><strong>TODO</strong> – warning:</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.n">
+<span class="sig-name descname"><span class="pre">n</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.n" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.plot_behavior">
+<span class="sig-name descname"><span class="pre">plot_behavior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.plot_behavior"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.plot_behavior" title="Link to this definition"></a></dt>
+<dd><p>Plot the measured A/R ratio versus shielding effectiveness (SET) for a given experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment to plot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.plot_coefficients">
+<span class="sig-name descname"><span class="pre">plot_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/Experiment.html#ExperimentData.plot_coefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.plot_coefficients" title="Link to this definition"></a></dt>
+<dd><p>Plot the measured reflectance (R) versus transmittance (T) for a given experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>experiment_name</strong> (<em>str</em>) – Name of the experiment to plot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.reverse">
+<span class="sig-name descname"><span class="pre">reverse</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.reverse" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.structure">
+<span class="sig-name descname"><span class="pre">structure</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.structure" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LayerOpt.Experiment.ExperimentData.wt">
+<span class="sig-name descname"><span class="pre">wt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#LayerOpt.Experiment.ExperimentData.wt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../module_data.html" class="btn btn-neutral float-left" title="LayerOpt.Experiment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Brecht Evens.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿LayerOpt.Permittivity.QuadraticSplinePermittivityModel
+======================================================
+
+.. currentmodule:: LayerOpt.Permittivity
+
+.. autoclass:: QuadraticSplinePermittivityModel
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~QuadraticSplinePermittivityModel.__init__
+      ~QuadraticSplinePermittivityModel.evaluate_permittivity
+      ~QuadraticSplinePermittivityModel.get_default_bounds
+      ~QuadraticSplinePermittivityModel.get_default_params
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~QuadraticSplinePermittivityModel.p
+      ~QuadraticSplinePermittivityModel.p_extra
+   
+   

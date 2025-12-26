@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LayerOpt.Experiment &mdash; LayerOpt 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            LayerOpt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Navigation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#installing-layeropt">Installing LayerOpt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#testing-your-installation">Testing Your Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#permittivity-models">Permittivity Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#multilayerstructure">MultilayerStructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#learning-permittivity-models">Learning Permittivity Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#optimizing-multilayer-structures">Optimizing Multilayer Structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../background.html">Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../background.html#multilayer-dielectric-slab-structures">Multilayer Dielectric Slab Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../background.html#learning-permittivity-model">Learning Permittivity Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../background.html#optimizing-material-parameters">Optimizing Material Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../module_permittivity.html">LayerOpt.Permittivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.PermittivityModel.html">LayerOpt.Permittivity.PermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.LinearPermittivityModel.html">LayerOpt.Permittivity.LinearPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.QuadraticPermittivityModel.html">LayerOpt.Permittivity.QuadraticPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.LinearSplinePermittivityModel.html">LayerOpt.Permittivity.LinearSplinePermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.QuadraticSplinePermittivityModel.html">LayerOpt.Permittivity.QuadraticSplinePermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.SimpleLinearPermittivityModel.html">LayerOpt.Permittivity.SimpleLinearPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticPermittivityModel.html">LayerOpt.Permittivity.SimpleQuadraticPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.html">LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../module_multilayer.html">LayerOpt.core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerStructure.html">LayerOpt.core.MultilayerStructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerOptimizer.html">LayerOpt.core.MultilayerOptimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerLearner.html">LayerOpt.core.MultilayerLearner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.MultilayerProblemSolution.html">LayerOpt.core.MultilayerProblemSolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.core.closest_entries.html">LayerOpt.core.closest_entries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../module_data.html">LayerOpt.Experiment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html">LayerOpt.Experiment.ExperimentData</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LayerOpt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">LayerOpt.Experiment</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for LayerOpt.Experiment</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">errno</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+
+
+<div class="viewcode-block" id="ExperimentData">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExperimentData</span><span class="p">:</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Dataclass for managing and loading experimental multilayer measurement data.</span>
+
+<span class="sd">		This class loads experiment metadata (material parameters, multilayer structure, characteristic impedance of the outgoing medium)</span>
+<span class="sd">		and S-parameter data (S11, S21, S12, S22) from a given directory. It also provides core methods to </span>
+<span class="sd">		compute transmission, reflection, and absorption coefficients, as well as derived metrics </span>
+<span class="sd">		such as A/R and shielding effectiveness (SET).</span>
+
+<span class="sd">		Attributes</span>
+<span class="sd">		----------</span>
+<span class="sd">		directory : str</span>
+<span class="sd">			Path to the directory containing experiment CSV files and the `overview.csv` file.</span>
+<span class="sd">		reverse : bool</span>
+<span class="sd">			If True, also considers &#39;reversed&#39; versions of the experiments by considering not only the forward</span>
+<span class="sd">			S11 and S21 measurements but also the reverse S22 and S21 measurements. Note that this is only allowed</span>
+<span class="sd">			when all experiments have free air om both sides of the multilayer stack, i.e., the characteristic</span>
+<span class="sd">			impedance of the last, outgoing medium is equal to one. </span>
+<span class="sd">		wt : dict of {str: np.ndarray}</span>
+<span class="sd">			Dictionary mapping experiment names to the corresponding list of material parameters of each layer.</span>
+<span class="sd">		layer_thickness : dict of {str: float}</span>
+<span class="sd">			Dictionary mapping experiment names to the corresponding layer thickness.</span>
+<span class="sd">		impedance_out : dict of {str: float}</span>
+<span class="sd">			Dictionary mapping experiment names to the corresponding characteristic impedance of the final, outgoing medium.</span>
+<span class="sd">		structure : dict of {str: MultilayerStructure}</span>
+<span class="sd">			Dictionary mapping experiment names to the corresponding MultilayerStructure.</span>
+<span class="sd">		X : dict of {str: np.ndarray}</span>
+<span class="sd">			Dictionary mapping experiment names to the corresponding frequencies.</span>
+<span class="sd">			Each entry is a 1D NumPy array of frequency points (in GHz) extracted from the corresponding experiment CSV file.</span>
+<span class="sd">		Y : dict of {str: np.ndarray}</span>
+<span class="sd">			Dictionary mapping experiment names to the corresponding complex-valued S-parameters, stored as a 2xL array where </span>
+<span class="sd">			the first row contains S11 and the second row contains S21.</span>
+<span class="sd">			Magnitude and phase data from the CSV file (e.g., `db:Trc1_S11`, `ang:Trc1_S11`, etc.) are combined into these complex quantities.</span>
+<span class="sd">		n:  int</span>
+<span class="sd">			Number of VNA measurements in the dataset.</span>
+
+<span class="sd">		Notes</span>
+<span class="sd">		-----</span>
+<span class="sd">		The class expects a file named `overview.csv` in the given directory, which defines the material parameters </span>
+<span class="sd">		of each experiment, as well as the layer thickness and optionally the characteristic impedance of the last, outgoing medium. </span>
+<span class="sd">		This is typically equal to one (free space) but can, for instance, be set to zero to represent a reflective material.</span>
+
+<span class="sd">		Each experiment listed in `overview.csv` should be accompanied by a corresponding CSV file containing S-parameter </span>
+<span class="sd">		data with columns named `db:Trc...` and `ang:Trc...` measured by a vector network analyzer. The files are automatically parsed, converted </span>
+<span class="sd">		into complex S-parameters, and stored for analysis.</span>
+
+<span class="sd">		Examples</span>
+<span class="sd">		--------</span>
+<span class="sd">		Load all experiments from a directory:</span>
+
+<span class="sd">		&gt;&gt;&gt; data = ExperimentData(directory=&#39;../measurements/&#39;)</span>
+<span class="sd">		&gt;&gt;&gt; print(data.get_names())</span>
+<span class="sd">		dict_keys([&#39;sample1&#39;, &#39;sample2&#39;, &#39;sample3&#39;])</span>
+
+<span class="sd">		Retrieve and plot A/R versus shielding effectiveness for one experiment:</span>
+
+<span class="sd">		&gt;&gt;&gt; data.plot_behavior(&#39;sample1&#39;)</span>
+
+<span class="sd">		Get computed coefficients:</span>
+
+<span class="sd">		&gt;&gt;&gt; T = data.get_T(&#39;sample1&#39;)</span>
+<span class="sd">		&gt;&gt;&gt; R = data.get_R(&#39;sample1&#39;)</span>
+<span class="sd">		&gt;&gt;&gt; A = data.get_A(&#39;sample1&#39;)</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">directory</span><span class="p">:</span> <span class="nb">str</span>
+	<span class="n">reverse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Add reverse flag to control reverse data loading</span>
+	<span class="n">wt</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+	<span class="n">layer_thickness</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+	<span class="n">impedance_in</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+	<span class="n">impedance_out</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+	<span class="n">structure</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+	<span class="n">X</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+	<span class="n">Y</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+	<span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+	<span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Automatically load all experiment data upon initialization.&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">load_experiment_data</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ExperimentData.load_overview">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.load_overview">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">load_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Load the material parameter data and experiment setup metadata from the file `overview.csv`.</span>
+
+<span class="sd">			This method reads a CSV file that defines the material parameters, layer thickness,</span>
+<span class="sd">			and optionally the outgoing medium impedance for each experiment. It also </span>
+<span class="sd">			instantiates a `MultilayerStructure` object for each experiment.</span>
+
+<span class="sd">			Raises</span>
+<span class="sd">			------</span>
+<span class="sd">			FileNotFoundError</span>
+<span class="sd">				If `overview.csv` cannot be found in the specified directory.</span>
+<span class="sd">			NotImplementedError</span>
+<span class="sd">				If `reverse = True` but one of the experiments in `overview.csv` has a characteristic impedance of the last, outgoing medium which is not equal to one.</span>
+<span class="sd">			TODO: warning</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="kn">from</span><span class="w"> </span><span class="nn">.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultilayerStructure</span>
+
+		<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span> <span class="s1">&#39;overview.csv&#39;</span><span class="p">))):</span>
+			<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span> <span class="s1">&#39;overview.csv&#39;</span><span class="p">)))</span>
+
+			<span class="c1"># Convert weight strings to numpy arrays and store them</span>
+			<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">wt</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;experiment_name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;[]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+				<span class="n">optional_fields</span> <span class="o">=</span> <span class="p">{</span>
+					<span class="s1">&#39;layer_thickness&#39;</span><span class="p">:</span> <span class="mf">0.005</span><span class="p">,</span>
+					<span class="s1">&#39;impedance_out&#39;</span><span class="p">:</span> <span class="mi">1</span>
+				<span class="p">}</span>
+
+				<span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">default</span> <span class="ow">in</span> <span class="n">optional_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+					<span class="n">value</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+					<span class="n">value</span> <span class="o">=</span> <span class="n">default</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">else</span> <span class="n">value</span>
+					<span class="n">attr_dict</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+					<span class="n">attr_dict</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;experiment_name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+
+				<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">impedance_out</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;experiment_name&#39;</span><span class="p">]]</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+					<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;The option `reverse = True` is only allowed when the experiments have free space on both sides of the madium, i.e., when the characteristic impedance of the last, outgoing medium is equal to one&quot;</span><span class="p">)</span>
+				
+				<span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;experiment_name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">MultilayerStructure</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer_thickness</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;experiment_name&#39;</span><span class="p">]],</span> <span class="n">n_lay</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wt</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;experiment_name&#39;</span><span class="p">]]),</span> <span class="n">impedance_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">impedance_out</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;experiment_name&#39;</span><span class="p">]])</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span> <span class="s1">&#39;overview.csv&#39;</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.load_experiment">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.load_experiment">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">load_experiment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Load S-parameter data for a single experiment.</span>
+
+<span class="sd">			This method parses a CSV file containing frequency-dependent S-parameter</span>
+<span class="sd">			magnitude (in dB) and phase (in degrees) data measured by a vector network analyzer.</span>
+<span class="sd">			The complex-valued coefficients (S11, S21, S12, S22) are reconstructed and stored.</span>
+<span class="sd">			If the `reverse` flag is set, reversed measurements are also added (S22, S12), with the string</span>
+<span class="sd">			&quot;_reverse&quot; added to the original experiment name.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			filename : str</span>
+<span class="sd">				Name of the CSV file containing the experiment data.</span>
+<span class="sd">			</span>
+<span class="sd">			Raises</span>
+<span class="sd">			------</span>
+<span class="sd">			NotImplementedError</span>
+<span class="sd">				If the CSV file contains unsupported column names.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+		<span class="n">experiment_name</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+		<span class="c1"># Load the CSV file</span>
+		<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+
+		<span class="n">filtered_magnitudes</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="n">filtered_angles</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+			<span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;freq[Hz]&#39;</span><span class="p">:</span>
+				<span class="n">X_freq</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;freq[Hz]&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="mf">1e-9</span>  <span class="c1"># Convert frequency to GHz</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;freq[Hz]&#39;</span><span class="p">])</span>
+			<span class="k">elif</span> <span class="n">key</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;db:Trc&#39;</span><span class="p">:</span>
+				<span class="n">filtered_magnitudes</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+			<span class="k">elif</span> <span class="n">key</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;ang:Trc&#39;</span><span class="p">:</span>
+				<span class="n">filtered_angles</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;The provided CSV file contains keys which are not compatible. Only the key &#39;freq[Hz]&#39; and keys ending in &#39;db:Trc&#39; and &#39;and:Trc&#39; are supported.&quot;</span><span class="p">)</span>
+			
+		<span class="k">def</span><span class="w"> </span><span class="nf">get_S</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+			<span class="k">return</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">db</span><span class="o">/</span><span class="mi">20</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">angle</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span>
+
+		<span class="n">S11</span><span class="p">,</span> <span class="n">S12</span><span class="p">,</span> <span class="n">S21</span><span class="p">,</span> <span class="n">S22</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_S</span><span class="p">(</span><span class="n">filtered_magnitudes</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">filtered_angles</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;S11&#39;</span><span class="p">,</span> <span class="s1">&#39;S12&#39;</span><span class="p">,</span> <span class="s1">&#39;S21&#39;</span><span class="p">,</span> <span class="s1">&#39;S22&#39;</span><span class="p">]]</span>
+
+		<span class="c1"># Store the frequency and coefficient data in the class dictionaries</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">experiment_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_freq</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="p">[</span><span class="n">experiment_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">S11</span><span class="p">,</span> <span class="n">S21</span><span class="p">])</span>
+
+		<span class="c1"># Store reverse data if reverse flag is enabled</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">:</span>
+			<span class="n">reverse_experiment_name</span> <span class="o">=</span> <span class="n">experiment_name</span> <span class="o">+</span> <span class="s2">&quot;_reverse&quot;</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">wt</span><span class="p">[</span><span class="n">reverse_experiment_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wt</span><span class="p">[</span><span class="n">experiment_name</span><span class="p">])</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">reverse_experiment_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_freq</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="p">[</span><span class="n">reverse_experiment_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">S22</span><span class="p">,</span> <span class="n">S12</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.load_experiment_data">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.load_experiment_data">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">load_experiment_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Load all experiment data from the given directory.</span>
+
+<span class="sd">			This method first loads the material parameter data and experiment setup metadata from `overview.csv`,</span>
+<span class="sd">			then iterates over all other CSV files in the directory to load S-parameter data for each experiment.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">load_overview</span><span class="p">()</span>
+
+		<span class="c1"># Loop through all files in the directory and load experiment data (excluding the weights file)</span>
+		<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filename</span> <span class="o">!=</span> <span class="s1">&#39;overview.csv&#39;</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">load_experiment</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_names">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_names">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Returns the names of all loaded experiments.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			list of str</span>
+<span class="sd">				Names of all loaded experiments.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">wt</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_material_parameters">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_material_parameters">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_material_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Returns the material parameters for a specific experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			np.ndarray</span>
+<span class="sd">				Array of material parameters associated with the experiment.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">wt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_X">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_X">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_X</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Returns the frequency vector for a specific experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			np.ndarray</span>
+<span class="sd">				1D array of frequency values in GHz.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_Y">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_Y">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_Y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Returns the measured S11- and S21-parameters for a specific experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			np.ndarray</span>
+<span class="sd">				2xL array of complex S-parameters where the first row corresponds to S11 </span>
+<span class="sd">				and the second row corresponds to S21.</span>
+
+<span class="sd">			Notes</span>
+<span class="sd">			-----</span>
+<span class="sd">				For &#39;_reverse&#39; experiments, the first row corresponds to the S22- and the second</span>
+<span class="sd">				to the S21-parameters of the original (non-reversed) experiment.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_S11">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_S11">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_S11</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Returns the measured S11-parameters for a specific experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			np.ndarray</span>
+<span class="sd">				Array of complex S11-parameters.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Y</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_S21">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_S21">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_S21</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Returns the measured S21-parameters for a specific experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			np.ndarray</span>
+<span class="sd">				Array of complex S21-parameters.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Y</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_T">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_T">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_T</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the transmittance coefficient for a given experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			np.ndarray</span>
+<span class="sd">				Transmittance values calculated as :math:`|S_{21}|^2`.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_S21</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_R">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_R">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_R</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the reflectance coefficient for a given experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			np.ndarray</span>
+<span class="sd">				Reflectance values calculated as :math:`|S_{11}|^2`.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_S11</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_A">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_A">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_A</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the absorptance coefficient for a given experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			np.ndarray</span>
+<span class="sd">				Absorptance values calculated as 1 - T - R.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_T</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_R</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.plot_behavior">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.plot_behavior">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">plot_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Plot the measured A/R ratio versus shielding effectiveness (SET) for a given experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment to plot.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">AR</span><span class="p">,</span> <span class="n">SET</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_AR_SET</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span>
+
+		<span class="c1">## plot response</span>
+		<span class="nb">dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">SET</span><span class="p">,</span> <span class="n">AR</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">dir</span> <span class="o">+</span> <span class="n">experiment_name</span><span class="p">)</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;A/R&quot;</span><span class="p">)</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Shielding effectiveness [dB]&quot;</span><span class="p">)</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+		<span class="n">current_ylim</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">current_ylim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">250</span><span class="p">:</span>
+			<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span></div>
+
+		
+<div class="viewcode-block" id="ExperimentData.plot_coefficients">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.plot_coefficients">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">plot_coefficients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Plot the measured reflectance (R) versus transmittance (T) for a given experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment to plot.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_T</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span>
+		<span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_R</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span>
+
+		<span class="c1">## plot response</span>
+		<span class="nb">dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">dir</span> <span class="o">+</span> <span class="n">experiment_name</span><span class="p">)</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">)</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+		<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_unique_experiments">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_unique_experiments">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_unique_experiments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Group experiments by their material parameters.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			dict</span>
+<span class="sd">				Dictionary mapping tuples of material parameters to lists of experiment names</span>
+<span class="sd">				that share those material parameters.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">reverse_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">wt</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="n">reverse_dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">reverse_dict</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_duplicate_experiments">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_duplicate_experiments">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_duplicate_experiments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Find experiments that occur more than once.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			dict</span>
+<span class="sd">				Dictionary mapping tuples of material parameters to lists of experiment names</span>
+<span class="sd">				that have identical material parameters (i.e., appear more than once).</span>
+
+<span class="sd">			Notes</span>
+<span class="sd">			-----</span>
+<span class="sd">				This function only considers the material parameters. An experiment is </span>
+<span class="sd">				considered a `real duplicate` if the layer thickness and the characteristic </span>
+<span class="sd">				impedance of the outgoing medium are also identical.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="p">{</span><span class="n">value</span><span class="p">:</span> <span class="n">keys</span> <span class="k">for</span> <span class="n">value</span><span class="p">,</span> <span class="n">keys</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_unique_experiments</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_AR_SET">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_AR_SET">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_AR_SET</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the A/R ratio and shielding effectiveness (SET) for a given experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			tuple of np.ndarray</span>
+<span class="sd">				A/R ratio and shielding effectiveness (in dB), respectively.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_T</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span>
+		<span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_R</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span>
+		<span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_A</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">A</span><span class="o">/</span><span class="n">R</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">T</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ExperimentData.get_worst_case_AR_SET">
+<a class="viewcode-back" href="../../_autosummary/LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData.get_worst_case_AR_SET">[docs]</a>
+	<span class="k">def</span><span class="w"> </span><span class="nf">get_worst_case_AR_SET</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">			Compute the worst-case (minimum) values of A/R and SET for a given experiment.</span>
+
+<span class="sd">			Parameters</span>
+<span class="sd">			----------</span>
+<span class="sd">			experiment_name : str</span>
+<span class="sd">				Name of the experiment.</span>
+
+<span class="sd">			Returns</span>
+<span class="sd">			-------</span>
+<span class="sd">			tuple of float</span>
+<span class="sd">				Minimum A/R ratio and minimum shielding effectiveness (in dB) across all measured frequencies.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">AR</span><span class="p">,</span> <span class="n">SET</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_AR_SET</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">AR</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">SET</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Brecht Evens.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

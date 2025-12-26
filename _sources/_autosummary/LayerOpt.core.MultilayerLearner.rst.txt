@@ -1,0 +1,25 @@
+﻿LayerOpt.core.MultilayerLearner
+===============================
+
+.. currentmodule:: LayerOpt.core
+
+.. autoclass:: MultilayerLearner
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MultilayerLearner.__init__
+      ~MultilayerLearner.cost_coeffs
+      ~MultilayerLearner.cost_relative_SET_AR
+      ~MultilayerLearner.optimize
+   
+   
+
+   
+   
+   

@@ -1,0 +1,35 @@
+﻿LayerOpt.core.MultilayerStructure
+=================================
+
+.. currentmodule:: LayerOpt.core
+
+.. autoclass:: MultilayerStructure
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MultilayerStructure.__init__
+      ~MultilayerStructure.get_AR_SET
+      ~MultilayerStructure.get_S_parameters
+      ~MultilayerStructure.get_k0
+      ~MultilayerStructure.get_wave_properties
+      ~MultilayerStructure.get_waves
+      ~MultilayerStructure.get_worst_case_AR_SET
+      ~MultilayerStructure.visualize_behavior
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MultilayerStructure.total_t
+   
+   

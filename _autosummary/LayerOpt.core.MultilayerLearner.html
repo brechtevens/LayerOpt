@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LayerOpt.core.MultilayerLearner &mdash; LayerOpt 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LayerOpt.core.MultilayerProblemSolution" href="LayerOpt.core.MultilayerProblemSolution.html" />
+    <link rel="prev" title="LayerOpt.core.MultilayerOptimizer" href="LayerOpt.core.MultilayerOptimizer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            LayerOpt
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Navigation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installing-layeropt">Installing LayerOpt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#testing-your-installation">Testing Your Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#permittivity-models">Permittivity Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#multilayerstructure">MultilayerStructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#learning-permittivity-models">Learning Permittivity Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#optimizing-multilayer-structures">Optimizing Multilayer Structures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../background.html#multilayer-dielectric-slab-structures">Multilayer Dielectric Slab Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../background.html#learning-permittivity-model">Learning Permittivity Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../background.html#optimizing-material-parameters">Optimizing Material Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module_permittivity.html">LayerOpt.Permittivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.PermittivityModel.html">LayerOpt.Permittivity.PermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.LinearPermittivityModel.html">LayerOpt.Permittivity.LinearPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.QuadraticPermittivityModel.html">LayerOpt.Permittivity.QuadraticPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.LinearSplinePermittivityModel.html">LayerOpt.Permittivity.LinearSplinePermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.QuadraticSplinePermittivityModel.html">LayerOpt.Permittivity.QuadraticSplinePermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.SimpleLinearPermittivityModel.html">LayerOpt.Permittivity.SimpleLinearPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.SimpleQuadraticPermittivityModel.html">LayerOpt.Permittivity.SimpleQuadraticPermittivityModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel.html">LayerOpt.Permittivity.SimpleQuadraticSplinePermittivityModel</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module_multilayer.html">LayerOpt.core</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.core.MultilayerStructure.html">LayerOpt.core.MultilayerStructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.core.MultilayerOptimizer.html">LayerOpt.core.MultilayerOptimizer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">LayerOpt.core.MultilayerLearner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.core.MultilayerProblemSolution.html">LayerOpt.core.MultilayerProblemSolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.core.closest_entries.html">LayerOpt.core.closest_entries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../module_data.html">LayerOpt.Experiment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="LayerOpt.Experiment.ExperimentData.html">LayerOpt.Experiment.ExperimentData</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LayerOpt</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../module_multilayer.html">LayerOpt.core</a></li>
+      <li class="breadcrumb-item active">LayerOpt.core.MultilayerLearner</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/LayerOpt.core.MultilayerLearner.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="layeropt-core-multilayerlearner">
+<h1>LayerOpt.core.MultilayerLearner<a class="headerlink" href="#layeropt-core-multilayerlearner" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="LayerOpt.core.MultilayerLearner">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LayerOpt.core.</span></span><span class="sig-name descname"><span class="pre">MultilayerLearner</span></span><a class="reference internal" href="../_modules/LayerOpt/core.html#MultilayerLearner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.core.MultilayerLearner" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class for learning the permittivity model parameters from experimental measurements.</p>
+<p>This class provides methods to evaluate the error between measured and predicted
+quantities (transmittance, reflectance, absorption, S-parameters) and to optimize
+the permittivity model parameters by minimizing these errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>measurements</strong> (<a class="reference internal" href="LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData" title="LayerOpt.Experiment.ExperimentData"><em>ExperimentData</em></a>) – Object containing experimental measurements of the multilayer structures.</p></li>
+<li><p><strong>eps_model</strong> (<a class="reference internal" href="LayerOpt.Permittivity.PermittivityModel.html#LayerOpt.Permittivity.PermittivityModel" title="LayerOpt.Permittivity.PermittivityModel"><em>PermittivityModel</em></a>) – Model for the permittivity (dielectric constant) of the material, whose parameters
+will be optimized.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.core.MultilayerLearner.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurements</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/core.html#MultilayerLearner.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.core.MultilayerLearner.__init__" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>measurements</strong> (<a class="reference internal" href="LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData" title="LayerOpt.Experiment.ExperimentData"><em>ExperimentData</em></a>)</p></li>
+<li><p><strong>eps_model</strong> (<a class="reference internal" href="LayerOpt.Permittivity.PermittivityModel.html#LayerOpt.Permittivity.PermittivityModel" title="LayerOpt.Permittivity.PermittivityModel"><em>PermittivityModel</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id0" title="LayerOpt.core.MultilayerLearner.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(measurements, eps_model)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.core.MultilayerLearner.cost_coeffs" title="LayerOpt.core.MultilayerLearner.cost_coeffs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cost_coeffs</span></code></a>()</p></td>
+<td><p>Return a callable cost function computing squared errors on T, R, A coefficients.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#LayerOpt.core.MultilayerLearner.cost_relative_SET_AR" title="LayerOpt.core.MultilayerLearner.cost_relative_SET_AR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cost_relative_SET_AR</span></code></a>()</p></td>
+<td><p>Return a callable cost function computing squared relative errors for shielding effectiveness (SET) and absorption-to-reflectance ratio (A/R).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#LayerOpt.core.MultilayerLearner.optimize" title="LayerOpt.core.MultilayerLearner.optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize</span></code></a>(p0, cost_fun[, niter, T, maxiter])</p></td>
+<td><p>Optimizes the permittivity model parameters by minimizing a provided cost function using a basin-hopping algorithm.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurements</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/core.html#MultilayerLearner.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>measurements</strong> (<a class="reference internal" href="LayerOpt.Experiment.ExperimentData.html#LayerOpt.Experiment.ExperimentData" title="LayerOpt.Experiment.ExperimentData"><em>ExperimentData</em></a>)</p></li>
+<li><p><strong>eps_model</strong> (<a class="reference internal" href="LayerOpt.Permittivity.PermittivityModel.html#LayerOpt.Permittivity.PermittivityModel" title="LayerOpt.Permittivity.PermittivityModel"><em>PermittivityModel</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.core.MultilayerLearner.cost_coeffs">
+<span class="sig-name descname"><span class="pre">cost_coeffs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/core.html#MultilayerLearner.cost_coeffs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.core.MultilayerLearner.cost_coeffs" title="Link to this definition"></a></dt>
+<dd><p>Return a callable cost function computing squared errors on T, R, A coefficients.</p>
+<dl class="simple">
+<dt>Usage:</dt><dd><p>learner.optimize(p0, cost_fun=learner.cost_coeffs())</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.core.MultilayerLearner.cost_relative_SET_AR">
+<span class="sig-name descname"><span class="pre">cost_relative_SET_AR</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/core.html#MultilayerLearner.cost_relative_SET_AR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.core.MultilayerLearner.cost_relative_SET_AR" title="Link to this definition"></a></dt>
+<dd><p>Return a callable cost function computing squared relative errors for
+shielding effectiveness (SET) and absorption-to-reflectance ratio (A/R).</p>
+<dl class="simple">
+<dt>Usage:</dt><dd><p>learner.optimize(p0, cost_fun=learner.cost_relative_SET_AR())</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LayerOpt.core.MultilayerLearner.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_fun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LayerOpt/core.html#MultilayerLearner.optimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LayerOpt.core.MultilayerLearner.optimize" title="Link to this definition"></a></dt>
+<dd><p>Optimizes the permittivity model parameters by minimizing a provided cost function
+using a basin-hopping algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p0</strong> (<em>array-like</em>) – Initial guess for the permittivity model parameters.</p></li>
+<li><p><strong>cost_fun</strong> (<em>callable</em>) – Function that takes a parameter vector and returns a scalar cost.</p></li>
+<li><p><strong>niter</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of basin-hopping iterations.</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – Temperature parameter for basin-hopping.</p></li>
+<li><p><strong>maxiter</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum iterations for the local minimizer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>optimal_params</strong> (<em>np.ndarray</em>) – Optimized permittivity model parameters.</p></li>
+<li><p><strong>optimal_cost</strong> (<em>float</em>) – Value of the cost function at the optimum.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="LayerOpt.core.MultilayerOptimizer.html" class="btn btn-neutral float-left" title="LayerOpt.core.MultilayerOptimizer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="LayerOpt.core.MultilayerProblemSolution.html" class="btn btn-neutral float-right" title="LayerOpt.core.MultilayerProblemSolution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Brecht Evens.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

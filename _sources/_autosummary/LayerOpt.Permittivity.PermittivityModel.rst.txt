@@ -1,0 +1,32 @@
+﻿LayerOpt.Permittivity.PermittivityModel
+=======================================
+
+.. currentmodule:: LayerOpt.Permittivity
+
+.. autoclass:: PermittivityModel
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PermittivityModel.__init__
+      ~PermittivityModel.evaluate_permittivity
+      ~PermittivityModel.get_default_bounds
+      ~PermittivityModel.get_default_params
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PermittivityModel.p
+      ~PermittivityModel.p_extra
+   
+   
