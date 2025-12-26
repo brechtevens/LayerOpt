@@ -52,7 +52,7 @@ class MultilayerStructure:
 		return float(self.t*self.n_lay)
 
 	@staticmethod
-	@njit(cache=True)
+	@njit
 	def get_k0(f):
 		"""
 			Computes the free-space wavenumber of a wave with a given frequency.
