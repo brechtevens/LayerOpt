@@ -4,7 +4,7 @@ Installation
 Prerequisites
 -------------
 
-LayerOpt has been tested on **Python 3.10, 3.11, 3.12 and 3.13**. Make sure that one of these versions is installed on your system before proceeding.
+LayerOpt has been tested on **Python 3.10, 3.11, 3.12 and 3.13** on *Windows* and *Ubuntu*. Make sure that one of these versions is installed on your system before proceeding.
 
 Installing LayerOpt
 -------------------
