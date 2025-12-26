@@ -24,6 +24,7 @@ This will install LayerOpt along with its required dependencies:
 - pandas
 - matplotlib
 - numba
+- joblib
 - pytest
 
 Testing Your Installation
