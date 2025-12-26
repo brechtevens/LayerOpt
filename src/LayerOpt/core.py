@@ -2,7 +2,7 @@ import numpy as np
 from numba import jit, njit, prange
 
 from scipy.optimize import basinhopping
-import multiprocessing as mp
+from joblib import Parallel, delayed
 import itertools
 
 import matplotlib.pyplot as plt
@@ -703,8 +703,9 @@ class MultilayerOptimizer:
 				# Discrete optimization
 				tic = time.perf_counter()
 				x_points = list(itertools.product(*x_ranges))
-				with mp.Pool(mp.cpu_count()) as pool:
-					x_results = pool.map(self.eval_brute_cost, x_points)
+				x_results = Parallel(n_jobs=-1, backend="loky")(
+					delayed(self.eval_brute_cost)(x) for x in x_points
+				)
 				x_discrete = np.array(x_points[np.argmin(x_results)])
 				toc = time.perf_counter()
 				sol_time_discrete = toc - tic
