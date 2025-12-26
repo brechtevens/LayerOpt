@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from numba import jit, njit, prange
 
@@ -703,7 +704,7 @@ class MultilayerOptimizer:
 				# Discrete optimization
 				tic = time.perf_counter()
 				x_points = list(itertools.product(*x_ranges))
-				x_results = Parallel(n_jobs=-1, backend="threading")(
+				x_results = Parallel(n_jobs=max(1, os.cpu_count()-1), backend="threading")(
 					delayed(self.eval_brute_cost)(x) for x in x_points
 				)
 				x_discrete = np.array(x_points[np.argmin(x_results)])

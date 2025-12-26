@@ -1,14 +1,14 @@
 # test_permittivity_example.py
 import subprocess
 import os
+import sys
 
 env = os.environ.copy()
-env["NUMBA_DISABLE_JITCACHE"] = "1"
 env["MPLBACKEND"] = "Agg"
 
 def test_experiment_script():
     result = subprocess.run(
-        ["python", "scripts/Experiment-example.py"],  # adjust path if needed
+        [sys.executable, "scripts/Experiment-example.py"],  # adjust path if needed
         capture_output=True,
         env=env
     )
@@ -16,7 +16,7 @@ def test_experiment_script():
 
 def test_multilayerlearner_script():
     result = subprocess.run(
-        ["python", "scripts/MultilayerLearner-example.py"],  # adjust path if needed
+        [sys.executable, "scripts/MultilayerLearner-example.py"],  # adjust path if needed
         capture_output=True,
         env=env
     )
@@ -24,7 +24,7 @@ def test_multilayerlearner_script():
 
 def test_multilayeroptimizer_script():
     result = subprocess.run(
-        ["python", "scripts/MultilayerOptimizer-example.py"],  # adjust path if needed
+        [sys.executable, "scripts/MultilayerOptimizer-example.py"],  # adjust path if needed
         capture_output=True,
         env=env
     )
@@ -32,7 +32,7 @@ def test_multilayeroptimizer_script():
 
 def test_multilayerstructure_script():
     result = subprocess.run(
-        ["python", "scripts/MultilayerStructure-example.py"],  # adjust path if needed
+        [sys.executable, "scripts/MultilayerStructure-example.py"],  # adjust path if needed
         capture_output=True,
         env=env
     )
@@ -40,7 +40,7 @@ def test_multilayerstructure_script():
 
 def test_permittivity_script():
     result = subprocess.run(
-        ["python", "scripts/Permittivity-example.py"],  # adjust path if needed
+        [sys.executable, "scripts/Permittivity-example.py"],  # adjust path if needed
         capture_output=True,
         env=env
     )
